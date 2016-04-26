@@ -12,23 +12,23 @@ public abstract class LevelDecorator implements ILevel {
 	}
 	
 	@Override
-	public int height() {
-		return delegate.height();
+	public int getHeight() {
+		return delegate.getHeight();
 	}
 
 	@Override
-	public int width() {
-		return delegate.width();
+	public int getWidth() {
+		return delegate.getWidth();
 	}
 
 	@Override
-	public boolean editing() {
-		return delegate.editing();
+	public boolean isEditing() {
+		return delegate.isEditing();
 	}
 
 	@Override
-	public Nature nature(int x, int y) {
-		return delegate.nature(x, y);
+	public Nature getNature(int x, int y) {
+		return delegate.getNature(x, y);
 	}
 
 	@Override
@@ -42,10 +42,15 @@ public abstract class LevelDecorator implements ILevel {
 	}
 
 	@Override
-	public void goPlay() {
-		delegate.goPlay();
+	public void goPlay(int xEntrance, int yEntrance, int xExit, int yExit) {
+		delegate.goPlay(xEntrance, yEntrance, xExit, yExit);
 	}
 
+	@Override
+	public void goEditing() {
+		delegate.goEditing();
+	}
+	
 	@Override
 	public void remove(int x, int y) {
 		delegate.remove(x, y);
@@ -58,25 +63,21 @@ public abstract class LevelDecorator implements ILevel {
 
 	@Override
 	public int getXEntrance() {
-		
 		return delegate.getXEntrance();
 	}
 
 	@Override
 	public int getYEntrance() {
-		
 		return delegate.getYEntrance();
 	}
 	
 	@Override
 	public int getXExit() {
-		
 		return delegate.getXExit();
 	}
 
 	@Override
 	public int getYExit() {
-		
 		return delegate.getYExit();
 	}
 }

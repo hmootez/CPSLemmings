@@ -70,7 +70,7 @@ public interface ILevel {
 	 *  \Pre : getNature(xEntrance,yEntrance) == Nature.EMPTY && getNature(xEntrance,yEntrance-1) == Nature.EMPTY && getNature(xEntrance,yEntrance+1) == Nature.EMPTY
 	 *  \Pre : getNature(xExit,yExit) == Nature.EMPTY && getNature(xExit,yExit-1) == Nature.METAL && getNature(xExit,yExit+1) == Nature.EMPTY
 	 *  \post : isEditing(goPlay()) == false
-	 *  \post : getNature(goPlay(),x,y) == getNature(x,y)@Pre
+	 *  \post : FORALL (x,y) / getNature(goPlay(),x,y) == getNature(x,y)@Pre
 	 *  \post : getXEntrance(goPlay()) == xEntrance
 	 *  \post : getYEntrance(goPlay()) == yEntrance
 	 *  \post : getXExit(goPlay()) == xExit
@@ -82,7 +82,7 @@ public interface ILevel {
 	/**
 	 *  \Pre : isEditing() == false
 	 *  \post : isEditing(goEditing()) == true
-	 *  \post : getNature(goEditing()) == getNature(x,y)@Pre
+	 *  \post : FORALL (x,y) / getNature(goEditing()) == getNature(x,y)@Pre
 	 *  \post : getXEntrance(goEditing()) == getXEntrance()@Pre
 	 *  \post : getYEntrance(goEditing()) == getYEntrance()@Pre
 	 *  \post : getXExit(goEditing()) == getXExit()@Pre
