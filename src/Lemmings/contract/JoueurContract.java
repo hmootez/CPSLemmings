@@ -141,8 +141,7 @@ public class JoueurContract extends JoueurDecorator {
 		if (!getName().equals(getName_atPre)) {
 			throw new PreConditionError("FaireAction_Pre : !getName().equals(getName_atPre)");
 		}
-		//FIXME
-		if (!(l.getComportement() == c)) {
+		if (!(l.getComportement().contains(c))) {
 			throw new PreConditionError("FaireAction_Pre : l.getComportement() != c)");
 		}
 	}

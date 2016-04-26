@@ -2,60 +2,119 @@ package Lemmings.services;
 
 public interface ILevel {
 	
-	//Types: bool, int, enum Nature {EMPTY, DIRT, METAL}
+	// TYPES: bool, int, enum Nature {EMPTY, DIRT, METAL}
 	
-	/*Observateurs*/
-	public int height();
-	public int width();
-	public boolean editing();
-	public Nature nature(int x,int y);
-	public int getXEntrance();
+	
+	
+	// OBSERVATORS -------------------------------------------------------------
+	public int getHeight(); /* const */ 
+	public int getWidth(); /* const */
+	public boolean isEditing();
+	public Nature getNature(int x,int y);
+	public int getXEntrance(); 
 	public int getYEntrance();
 	public int getXExit();
 	public int getYExit();
 	
-	/*Constructeurs*/
-	/**pre : x>0 & y>0
-	 * post : height(init(x,y))=y
-	 * post : width(init(x,y))=x
-	 * post : editing(init(x,y))=true
-	 * TODO Entrance/Exit values !!
-	 * post : getXEntrance(init(x,y)) = 5
-	 * post : getYEntrance(init(x,y)) = 5
-	 * post : getXExit(init(x,y)) = 10
-	 * post : getYExit(init(x,y)) = 10
-	 * post : nature(init(h,w),x,y) => Nature.METAL FORALL (x,y) / (x=1 & 0<y<height()) || (y=1 & 0<x<width()) 
-	//\||(x=width() & 0<y<height() || (y=height() & 0<x<width()) & nature(x,y) == Nature.METAL
-	 * */
+	
+	
+	// No INVARIANTS -----------------------------------------------------------
+	
+	
+	
+	// CONSTRUCTORS ------------------------------------------------------------
+	/**
+	 *  \pre : x > 0 && y > 0
+	 *  \post : getHeight(init(x,y)) == y
+	 *  \post : getWidth(init(x,y)) == x
+	 *  \post : isEditing(init(x,y)) == true
+	 *  \post : getXEntrance(init(x,y)) == -1
+	 *  \post : getYEntrance(init(x,y)) == -1
+	 *  \post : getXExit(init(x,y)) == -1
+	 *  \post : getYExit(init(x,y)) == -1
+	 *  \post : getNature(init(h,w),x,y) => (
+	 * 	    							 Nature.METAL FORALL (x,y) / 
+	 *  								 (x = 1 && 0 < y < getHeight()) || (y = 1 && 0 < x < getWidth()) ||
+	 *                                   (x = getWidth() && 0 < y < getHeight()) || (y = getHeight() && 0 < x < getWidth())
+	 *                               	 )
+	 *                                && (
+	 *                               	 Nature.EMPTY FORALL (x,y) / 
+	 * 									 (x != 1 && 0 < y < getHeight()) || (y != 1 && 0 < x < getWidth()) || 
+	 *                                   (x != getWidth() && 0 < y < getHeight()) || (y != getHeight() && 0 < x < getWidth())
+	 *                               	 )
+	 */
 	public void init(int x, int y);
 	
-	/*Operateurs*/
-	/**pre : x>0 & x<=width() & y>0 & y<height()
-	 * post : nature(setNature(x,y,n),x,y)==n  
+	
+	
+	// OPERATORS ---------------------------------------------------------------
+	/**
+	 *  \pre : x > 0 && x <= getWidth() && y > 0 && y <= getHeight()
+	 *  \post : getNature(setNature(x,y,n),x,y) == n 
+	 *  \post : isEediting(setNature(x,y,n)) == isEediting()@Pre
+	 *  \post : getXEntrance(setNature(x,y,n)) == getXEntrance()@Pre
+	 *  \post : getYEntrance(setNature(x,y,n)) == getYEntrance()@Pre
+	 *  \post : getXExit(setNature(x,y,n)) == getXExit()@Pre
+	 *  \post : getYExit(setNature(x,y,n)) == getYExit()@Pre
 	 */
-	public void setNature(int x,int y,Nature n);
+	public void setNature(int x, int y, Nature n);
 	
 	
-	/**pre : FORALL (x,y) / (x=1 & 0<y<height()) || (y=1 & 0<x<width()) 
-	//\||(x=width() & 0<y<height() || (y=height() & 0<x<width()) & nature(x,y) == Nature.METAL
-	 * post : editing(goPlay())== false
-	 * */
-	public void goPlay();
-	
-	/**Pre : nature(x,y) == Nature.DIRT
-	 * Pre : editing() == false
-	 * post : nature(remove(x,y),x,y)==Nature.EMPTY
-	 * 
-	 * */
-	public void remove(int x,int y);
-	
-	/**Pre : nature(x,y) == Nature.EMPTY
-	 * Pre : editing() == false
-	 * post : nature(remove(x,y),x,y)==Nature.DIRT
-	 * */
-	public void build(int x,int y);
-	
-	/**Observations*/
+	/**
+	 *  \pre : FORALL (x,y) / (x = 1 && 0 < y < getHeight()) || (y = 1 && 0 < x < getWidth()) 
+	 *                     || (x = getWidth() && 0 < y < getHeight()) || (y = getHeight() && 0 < x < getWidth()) 
+	 *                     && getNature(x,y) == Nature.METAL
+	 *  \pre : isEditing() == true
+	 *  \Pre : xEntrance > 0 && xEntrance < getWidth() && yEntrance > 0 && yEntrance < getHeight()
+	 *  \Pre : xExit > 0 && xExit < getWidth() && yExit > 0 && yExit < getHeight()
+	 *  \Pre : getNature(xEntrance,yEntrance) == Nature.EMPTY && getNature(xEntrance,yEntrance-1) == Nature.EMPTY && getNature(xEntrance,yEntrance+1) == Nature.EMPTY
+	 *  \Pre : getNature(xExit,yExit) == Nature.EMPTY && getNature(xExit,yExit-1) == Nature.METAL && getNature(xExit,yExit+1) == Nature.EMPTY
+	 *  \post : isEditing(goPlay()) == false
+	 *  \post : getNature(goPlay(),x,y) == getNature(x,y)@Pre
+	 *  \post : getXEntrance(goPlay()) == xEntrance
+	 *  \post : getYEntrance(goPlay()) == yEntrance
+	 *  \post : getXExit(goPlay()) == xExit
+	 *  \post : getYExit(goPlay()) == yExit
+	 */
+	public void goPlay(int xEntrance, int yEntrance, int xExit, int yExit);
 
-
+	
+	/**
+	 *  \Pre : isEditing() == false
+	 *  \post : isEditing(goEditing()) == true
+	 *  \post : getNature(goEditing()) == getNature(x,y)@Pre
+	 *  \post : getXEntrance(goEditing()) == getXEntrance()@Pre
+	 *  \post : getYEntrance(goEditing()) == getYEntrance()@Pre
+	 *  \post : getXExit(goEditing()) == getXExit()@Pre
+	 *  \post : getYExit(goEditing()) == getYExit()@Pre
+	 */
+	public void goEditing();
+	
+	
+	/**
+	 *  \Pre : getNature(x,y) == Nature.DIRT
+	 *  \Pre : isEditing() == false
+	 *  \Pre : x != getXEntrance() && y != getYEntrance() && x != getXExit() && y != getYExit()
+	 *  \post : getNature(remove(x,y),x,y) == Nature.EMPTY
+	 *  \post : isEditing(remove(x,y)) == isEditing()@Pre
+	 *  \post : getXEntrance(remove(x,y)) == getXEntrance()@Pre
+	 *  \post : getYEntrance(remove(x,y)) == getYEntrance()@Pre
+	 *  \post : getXExit(remove(x,y)) == getXExit()@Pre
+	 *  \post : getYExit(remove(x,y)) == getYExit()@Pre
+	 */
+	public void remove(int x, int y);
+	
+	
+	/**
+	 *  \Pre : getNature(x,y) == Nature.EMPTY
+	 *  \Pre : isEditing() == false
+	 *  \Pre : x != getXEntrance() && y != getYEntrance() && x != getXExit() && y != getYExit()
+	 *  \post : getNature(build(x,y),x,y) == Nature.DIRT
+	 *  \post : isEditing(build(x,y)) == isEditing()@Pre
+	 *  \post : getXEntrance(build(x,y)) == getXEntrance()@Pre
+	 *  \post : getYEntrance(build(x,y)) == getYEntrance()@Pre
+	 *  \post : getXExit(build(x,y)) == getXExit()@Pre
+	 *  \post : getYExit(build(x,y)) == getYExit()@Pre
+	 */
+	public void build(int x, int y);
 }

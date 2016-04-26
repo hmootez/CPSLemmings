@@ -5,8 +5,8 @@ import Lemmings.services.Nature;
 
 public class LevelImpl implements ILevel {
 
-	private int height;
-	private int width;
+	private final int height;
+	private final int width;
 	private boolean editing;
 	private Nature[][] grille;
 	
