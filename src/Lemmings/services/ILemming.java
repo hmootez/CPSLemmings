@@ -37,6 +37,7 @@ public interface ILemming {
 	 *  					true <==> getX() == IGameEng::ILevel::getXExit() && getY() == IGameEng::ILevel::getYExit()
 	 *  					false else
 	 *  					}
+	 *  \inv : getBuilderDelay() <= 3
 	 *  \inv : getBomberDelay() <= 5
 	 *  \inv : getBasherDelay() <= 20 
 	 */ 
@@ -269,18 +270,18 @@ public interface ILemming {
 	
 	
 	/** 
-	 *  \post : isDroitier(changeComportement(c)) = isDroitier()@pre
-	 *  \post : getX(changeComportement(c)) = getX()@pre
-	 *  \post : getY(changeComportement(c)) = getY()@pre
-	 *  \post : getFalling(changeComportement(c)) = getFalling()@pre
-	 *  \post : getGameEng(changeComportement(c)) = getGameEng()@pre 
-	 *  \post : getComportement(changeComportement(c)) = c
-	 *  \post : isDead(changeComportement(c)) = isDead()@pre
-	 *  \post : isSaved(changeComportement(c)) = isSaved()@pre
-	 *  \post : getDalles(changeComportement(c)) = getDalles()@pre
-	 *  \post : getBuilderDelay(changeComportement(c)) = getBuilderDelay()@pre
-	 *  \post : getBomberDelay(changeComportement(c)) = getBomberDelay()@pre
-	 *  \post : getBasherDelay(changeComportement(c)) = getBasherDelay()@pre
+	 *  \post : isDroitier(changeComportement(c)) == isDroitier()@pre
+	 *  \post : getX(changeComportement(c)) == getX()@pre
+	 *  \post : getY(changeComportement(c)) == getY()@pre
+	 *  \post : getFalling(changeComportement(c)) == getFalling()@pre
+	 *  \post : getGameEng(changeComportement(c)) == getGameEng()@pre 
+	 *  \post : getComportement(changeComportement(c)) == c
+	 *  \post : isDead(changeComportement(c)) == isDead()@pre
+	 *  \post : isSaved(changeComportement(c)) == isSaved()@pre
+	 *  \post : getDalles(changeComportement(c)) == getDalles()@pre
+	 *  \post : getBuilderDelay(changeComportement(c)) == getBuilderDelay()@pre
+	 *  \post : getBomberDelay(changeComportement(c)) == getBomberDelay()@pre
+	 *  \post : getBasherDelay(changeComportement(c)) == getBasherDelay()@pre
 	 */
 	public void changeComportement(Comportement c);
 }
