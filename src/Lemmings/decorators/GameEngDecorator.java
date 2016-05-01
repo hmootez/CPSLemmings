@@ -15,26 +15,28 @@ public abstract class GameEngDecorator implements IGameEng {
 	}
 
 	@Override
-	public boolean obstacle(int x, int y) {
-
-		return delegate.obstacle(x, y);
+	public boolean isObstacle(int x, int y) {
+		return delegate.isObstacle(x, y);
 	}
 
 	@Override
 	public int getTour() {
-
 		return delegate.getTour();
 	}
 
 	@Override
-	public int getscore() {
-
-		return delegate.getscore();
+	public int getMaxTour() {
+		return delegate.getMaxTour();
+	}
+	
+	@Override
+	public int getScore() {
+		return delegate.getScore();
 	}
 
 	@Override
-	public boolean gameOver() {
-		return delegate.gameOver();
+	public boolean isGameOver() {
+		return delegate.isGameOver();
 	}
 
 	@Override
@@ -48,19 +50,17 @@ public abstract class GameEngDecorator implements IGameEng {
 	}
 
 	@Override
-	public int getnblemmingcreated() {
-		return delegate.getnblemmingcreated();
+	public int getNbLemmingCreated() {
+		return delegate.getNbLemmingCreated();
 	}
 
 	@Override
-	public int getnblemmingsaved() {
-
-		return delegate.getnblemmingsaved();
+	public int getNbLemmingSaved() {
+		return delegate.getNbLemmingSaved();
 	}
 
 	@Override
 	public ILevel getLevel() {
-
 		return delegate.getLevel();
 	}
 
@@ -77,7 +77,5 @@ public abstract class GameEngDecorator implements IGameEng {
 	@Override
 	public void step() {
 		delegate.step();
-
 	}
-
 }

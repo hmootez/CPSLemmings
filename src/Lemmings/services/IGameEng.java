@@ -66,11 +66,11 @@ public interface IGameEng {
 	 *  \pre : isGameOver() == false
 	 *  \post : getTour(step()) == getTour()@Pre + 1
 	 *  \post : getNbLemmingCreated(step()) ==  FOR i (0..getMaxTour()) 
-	 *  										(i % getSpawnSpeed == 0 && getNbLemmingCreated < getSizeColony()) <==> getNbLemmingCreated()@Pre + 1 
+	 *  										(i % getSpawnSpeed() == 0 && getNbLemmingCreated() < getSizeColony()) <==> getNbLemmingCreated()@Pre + 1 
 	 *  \post : getNbLemmingSaved(step()) == FORALL ILemming IN getActivLemming()
 	 *  									 ILemming::isSaved() == true ==> getNbLemmingSaved()@Pre + 1
 	 *  \post : getLevel(step()) == getLevel()@Pre
-	 *  \post : FORALL ILemming in getActivLemming(step()) ILemming::step()
+	 *  \post : getActivLemming(step()) <==> FORALL ILemming in getActivLemming(step()) ILemming::step()
 	 */
 	public void step();
 }
