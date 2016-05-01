@@ -75,7 +75,17 @@ public abstract class LemmingDecorator implements ILemming {
 	}
 
 	@Override
-	public int getTourIncr() {
-		return delegate.getTourIncr();
+	public int getBuilderDelay() {
+		return delegate.getBuilderDelay();
+	}
+	
+	@Override
+	public int getBomberDelay() {
+		return delegate.getBomberDelay();
+	}
+	
+	@Override
+	public int getBasherDelay() {
+		return delegate.getBasherDelay();
 	}
 }

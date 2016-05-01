@@ -49,8 +49,7 @@ public interface ILemming {
 	 *  \post : isDroitier(init(c,core)) == True
 	 *  \post : getComportement(init(c,core)) == c
 	 *  \post : getX(init(c,core)) == IGameEng::ILevel::getXEntrance()
-	 *  \post : getY(init(c,core)) == IGameEng::ILevel::getYEntrance()
-	 *  \post : isDead(init(c,core)) == false 
+	 *  \post : getY(init(c,core)) == IGameEng::ILevel::getYEntrance() 
 	 *  \post : getFalling(c,core)) == 0
 	 *  \post : getGameEng(init(c,core)) == core
 	 *  \post : isDead(init(c,core)) == false
@@ -61,6 +60,7 @@ public interface ILemming {
 	 *  \post : getBasherDelay(init(c,core)) == 20
 	 **/
 	public void init(ArrayList<Comportement> c, IGameEng core);
+	
 	
 	
 	// OPERATORS ---------------------------------------------------------------
@@ -106,21 +106,21 @@ public interface ILemming {
 	 *  	==> Comportement.WALKER IN getComportement() && getX() = getX()@pre -1 && getY() = getY()@pre && isDroitier() = false && getFalling() = 0
 	 *  
 	 *  -------------------------------- FALLER --------------------------------
-	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER IN getComportement() && isDroitier()@pre = True && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling()@pre < 8 
+	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = True && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling()@pre < 8 
 	 *  	==> Comportement.FALLER IN getComportement() && getX() = getX()@pre  && getY() = getY()@pre +1 && isDroitier() = True && getFalling() = getFalling()@pre +1
 	 *  
-	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER IN getComportement() && isDroitier()@pre = false && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling() < 8 
+	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = false && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling() < 8 
 	 *  	==> Comportement.FALLER IN getComportement() && getX() = getX()@pre  && getY() = getY()@pre +1 && isDroitier() = false && getFalling() = getFalling()@pre +1
 	 *  
-	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER IN getComportement() && isDroitier()@pre = True && (IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling() < 8 
+	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = True && (IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling() < 8 
 	 *  	==> getComportement() = getComportement()@pre (-) Comportement.FALLER (+) Comportement.WALKER 
 	 *  		getX() = getX()@pre  && getY() = getY()@pre && isDroitier() = True && getFalling() = 0
 	 *  
-	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER IN getComportement() && isDroitier()@pre = false && (IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling() < 8 
+	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = false && (IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling() < 8 
 	 *  	==> getComportement() = getComportement()@pre (-) Comportement.FALLER (+) Comportement.WALKER 
 	 *  		&& getX() = getX()@pre  && getY() = getY()@pre && isDroitier() = false && getFalling() = 0
 	 *  
-	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER IN getComportement() && (IGameEng::isObstacle(getX()@pre,getY()@pre+1) && (getFalling() == 8) ==> isDead() = true
+	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && (IGameEng::isObstacle(getX()@pre,getY()@pre+1) && (getFalling() == 8) ==> isDead() = true
 	 *  
 	 *  --------------------------------- Safe ---------------------------------
 	 *  \post : getX()@pre = IGameEng::ILevel::getXExit() && getY()@pre = IGameEng::ILevel::getYExit() ==> isSafe() = true
@@ -194,43 +194,43 @@ public interface ILemming {
      *		
 	 *	-------------------------------- FLOATER -------------------------------
 	 *  \post : Comportement.FLOATER IN getComportement() && isDroitier()@pre = True && getComportement() contains Comportement.FALLER
-	 *  		&& IGameEng::getTour() mod 2 == 0 && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) ==> Comportement.FLOATER IN getComportement() 
-	 *   		&& getComportement() contains Comportement.FALLER
+	 *  		&& IGameEng::getTour() mod 2 == 0 && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) 
+	 *  	==> Comportement.FLOATER IN getComportement() && Comportement.FALLER IN getComportement()
 	 *   		&& getX() = getX()@pre && getY() = getY()@pre+1 && isDroitier() = True && getFalling() = getFalling()@pre
 	 *   
 	 *  \post : Comportement.FLOATER IN getComportement() && isDroitier()@pre = True && getComportement() contains Comportement.FALLER
-	 *   		&& IGameEng::getTour() mod 2 == 1 && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) ==> Comportement.FLOATER IN getComportement() 
-	 *   		&& getComportement() contains Comportement.FALLER
+	 *   		&& IGameEng::getTour() mod 2 == 1 && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) 
+	 *   	==> Comportement.FLOATER IN getComportement() && Comportement.FALLER IN getComportement()
 	 *   		&& getX() = getX()@pre && getY() = getY()@pre && isDroitier() = True && getFalling() = getFalling()@pre
 	 *   
 	 *  \post : Comportement.FLOATER IN getComportement() && isDroitier()@pre = false && getComportement() contains Comportement.FALLER
-	 *   		&& IGameEng::getTour() mod 2 == 0 && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) ==> Comportement.FLOATER IN getComportement() 
-	 *   		&& getComportement() contains Comportement.FALLER
+	 *   		&& IGameEng::getTour() mod 2 == 0 && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) 
+	 *   	==> Comportement.FLOATER IN getComportement() && Comportement.FALLER IN getComportement()
 	 *   		&& getX() = getX()@pre && getY() = getY()@pre+1 && isDroitier() = false && getFalling() = getFalling()@pre  
 	 *   
 	 *  \post : Comportement.FLOATER IN getComportement() && isDroitier()@pre = false && getComportement() contains Comportement.FALLER
-	 *   		&& IGameEng::getTour() mod 2 == 1 && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) ==> Comportement.FLOATER IN getComportement() 
-	 *   		&& getComportement() contains Comportement.FALLER
+	 *   		&& IGameEng::getTour() mod 2 == 1 && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) 
+	 *   	==> Comportement.FLOATER IN getComportement() && Comportement.FALLER IN getComportement()
 	 *   		&& getX()= getX()@pre && getY() = getY()@pre && isDroitier() = false && getFalling() = getFalling()@pre
 	 *   
 	 *   -------------------------------- BOMBER -------------------------------
 	 *  \post : Comportement.BOMBER IN getComportement() && getBomberDelay() > 0 ==> getBomberDelay() = getBomberDelay()@Pre-1
 	 *   
 	 *  \post : Comportement.BOMBER IN getComportement() && getBomberDelay() == 0 ==> isDead() = true 
-	 *  		&& if (IGameEng::ILevel::nature(getX(), getY()+1) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX(), getY()+1,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX(), getY()-1) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX(), getY()-1,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()+1) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()+1, getY()+1,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()+1) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()-1, getY()+1,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()+1, getY(),Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()-1, getY(),Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()+2, getY()) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()+2, getY(),Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()-2, getY()) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()-2, getY(),Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()-1) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()+1, getY()-1,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()-1) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()-1, getY()-1,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()-2) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()+1, getY()-2,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()-2) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()-1, getY()-2,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()-1) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()+1, getY()-1,Nature.DIRTY) }
-	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()-1) != Nature.DIRTY) { IGameEng::ILevel::setNature(getX()-1, getY()-1,Nature.DIRTY) } 
+	 *  		&& if (IGameEng::ILevel::nature(getX(), getY()+1) != Nature.DIRT) { IGameEng::ILevel::setNature(getX(), getY()+1,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX(), getY()-1) != Nature.DIRT) { IGameEng::ILevel::setNature(getX(), getY()-1,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()+1) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()+1, getY()+1,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()+1) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()-1, getY()+1,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()+1, getY(),Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()-1, getY(),Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()+2, getY()) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()+2, getY(),Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()-2, getY()) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()-2, getY(),Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()-1) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()+1, getY()-1,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()-1) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()-1, getY()-1,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()-2) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()+1, getY()-2,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()-2) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()-1, getY()-2,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()+1, getY()-1) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()+1, getY()-1,Nature.DIRT) }
+	 *      	&& if (IGameEng::ILevel::nature(getX()-1, getY()-1) != Nature.DIRT) { IGameEng::ILevel::setNature(getX()-1, getY()-1,Nature.DIRT) } 
 	 *  
 	 *  -------------------------------- STOPPER -------------------------------
 	 *  \post : getComportement() contains Comportement.STOPPER ==> IGameEng::isObstacle(getX()@pre,getY()@pre) 
