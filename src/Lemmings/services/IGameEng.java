@@ -36,7 +36,7 @@ public interface IGameEng {
 	 *  \inv : Card(getActivLemmings()) <= getSizeColony()
 	 *  \inv : isGameOver() == {
 	 *  					   true <==> (getNbLemmingCreated() == getSizeColony() && Card(getActivLemmings() == 0))
-	 *  					   else false
+	 *  					   false else
 	 *  					   } 
 	 *  \inv : getScore =(min) (getNbLemmingsaved() / getNbLemmingCreated()) * 100 + getTour()
 	 */

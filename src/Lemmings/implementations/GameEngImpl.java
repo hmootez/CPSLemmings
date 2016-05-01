@@ -26,6 +26,18 @@ public class GameEngImpl implements IGameEng {
 	}
 	
 	@Override
+	public void init(int sc, int sp, ILevel level) {
+		this.tour = 0;
+		this.maxTour = 50;
+		this.sizeColony = sc;
+		this.spawnSpeed = sp;
+		this.nbLemmingCreated = 0;
+		this.nbLemmingSaved = 0;
+		this.level = level;
+		this.activLemmings = new ArrayList<ILemming>();
+	}
+	
+	@Override
 	public void step() {
 		Ihm ihm = new Ihm();
 		for (int i = 0; i <= maxTour + 1; i++) { // FIXME < maxTour ou <= maxTour+1 ???
@@ -115,17 +127,5 @@ public class GameEngImpl implements IGameEng {
 	@Override
 	public ArrayList<ILemming> getActivLemmings() {
 		return this.activLemmings;
-	}
-
-	@Override
-	public void init(int sc, int sp, ILevel level) {
-		this.tour = 0;
-		this.maxTour = 50;
-		this.sizeColony = sc;
-		this.spawnSpeed = sp;
-		this.nbLemmingCreated = 0;
-		this.nbLemmingSaved = 0;
-		this.level = level;
-		this.activLemmings = new ArrayList<ILemming>();
 	}
 }
