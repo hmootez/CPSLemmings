@@ -1,6 +1,5 @@
 package Lemmings.implementations;
 
-import java.sql.Savepoint;
 import java.util.ArrayList;
 
 import Lemmings.ihm.Ihm;
@@ -12,56 +11,60 @@ import Lemmings.services.Nature;
 
 public class GameEngImpl implements IGameEng {
 
+	private int maxTour;
 	private int tour;
-	//XXX
-	private final int maxTour = 50;
-	private int score;
-	private boolean gameOver;
 	private int sizeColony;
 	private int spawnSpeed;
-	private int nblemmingcreated;
-	private int nblemmingsaved;	
-	
+	private int nbLemmingCreated;
+	private int nbLemmingSaved;
 	private ILevel level;
 	private ArrayList<ILemming> activLemmings;
 	
 	public GameEngImpl(int sc, int sp, ILevel level) {
-		init(sc,sp,level); 
-		 startGame() ;
-		
+		this.init(sc,sp,level); 
+		this.step();	
 	}
 	
-	private void startGame() {
-		
+	@Override
+	public void step() {
 		Ihm ihm = new Ihm();
-		//FIXME < maxTour ou <= maxTour+1 ??? 
-		for(int i = 0; i <= maxTour+1; i++) {
-			tour = i ;
-			this.step();
+		for (int i = 0; i <= maxTour + 1; i++) { // FIXME < maxTour ou <= maxTour+1 ???
 			
-			ihm.updatedraw(getLevel(),getActivLemmings());
-			
-			// vérification si la partie est fini 
-			if (gameOver()) {
-				System.err.println(getscore());
-				break;
-			}
-			
-			if (i % spawnSpeed == 0 && nblemmingcreated < getSizeColony()) {
+			if (i % spawnSpeed == 0 && nbLemmingCreated < getSizeColony()) {
 				ArrayList<Comportement> comportements = new ArrayList<Comportement>();
 				comportements.add(Comportement.FALLER);
 				activLemmings.add(new LemmingImpl(comportements, this));
-				nblemmingcreated++;
+				nbLemmingCreated++;
 			}
+			if (isGameOver()) {
+				System.out.println(getScore());
+				break;
+			}
+			applyLemmingStep();
+			tour++;
+			ihm.updatedraw(getLevel(), getActivLemmings());
 		}
 		
-		System.err.println("End of game     xxxxxxxxxxxxx");
-		System.out.println("Saved: " + getnblemmingsaved());
+		System.out.println("-----------------End of game-----------------");
+		System.out.println("Saved: " + getNbLemmingCreated());
 	}
 
+	private void applyLemmingStep() {
+		for (ILemming lem : (ArrayList<ILemming>)activLemmings.clone()) {
+			lem.step();
+			if (lem.isDead()) {
+				this.activLemmings.remove(lem);
+			}
+			if (lem.isSaved()) { 
+				nbLemmingSaved++ ; 
+				this.activLemmings.remove(lem);
+			}
+		}
+	}
+	
 	@Override
-	public boolean obstacle(int x, int y) {
-		return (this.getLevel().nature(x, y) == Nature.DIRT || this.getLevel().nature(x, y)== Nature.METAL);
+	public boolean isObstacle(int x, int y) {
+		return (getLevel().getNature(x, y) == Nature.DIRT || getLevel().getNature(x, y) == Nature.METAL);
 	}
 
 	@Override
@@ -70,17 +73,22 @@ public class GameEngImpl implements IGameEng {
 	}
 
 	@Override
-	public int getscore() {
-		return (getnblemmingsaved() / getnblemmingcreated())*100 + getTour();
+	public int getMaxTour() {
+		return this.maxTour;
+	}
+	
+	@Override
+	public int getScore() {
+		return (getNbLemmingSaved() / getNbLemmingCreated()) * 100 + getTour();
 	}
 
 	@Override
-	public boolean gameOver() {
-		return (getnblemmingsaved() == getSizeColony() && activLemmings.size() == 0) ; 
+	public boolean isGameOver() {
+		return (getNbLemmingSaved() == getSizeColony() && activLemmings.size() == 0); 
 	}
 
 	@Override
-	public int getSizeColony(){ 
+	public int getSizeColony() { 
 		return this.sizeColony;
 	}
 
@@ -90,13 +98,13 @@ public class GameEngImpl implements IGameEng {
 	}
 
 	@Override
-	public int getnblemmingcreated() {
-		return nblemmingcreated;
+	public int getNbLemmingCreated() {
+		return nbLemmingCreated;
 	}
 
 	@Override
-	public int getnblemmingsaved() {
-		return nblemmingsaved;
+	public int getNbLemmingSaved() {
+		return nbLemmingSaved;
 	}
 
 	@Override
@@ -111,23 +119,13 @@ public class GameEngImpl implements IGameEng {
 
 	@Override
 	public void init(int sc, int sp, ILevel level) {
+		this.tour = 0;
+		this.maxTour = 50;
 		this.sizeColony = sc;
 		this.spawnSpeed = sp;
-		this.activLemmings = new ArrayList<ILemming>();
-		this.tour=0;
-		this.gameOver = false;
+		this.nbLemmingCreated = 0;
+		this.nbLemmingSaved = 0;
 		this.level = level;
-	}
-
-	@Override
-	public void step() {		
-		for (ILemming lem : (ArrayList<ILemming>)activLemmings.clone()) {
-			lem.step();
-			if (lem.isDead()) this.activLemmings.remove(lem);
-			if(lem.isSaved()) { 
-				nblemmingsaved++ ; 
-				this.activLemmings.remove(lem);
-			}
-		}
+		this.activLemmings = new ArrayList<ILemming>();
 	}
 }
