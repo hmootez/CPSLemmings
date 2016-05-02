@@ -121,105 +121,111 @@ public class LemmingContract extends LemmingDecorator {
 	@Override
 	public void step() {
 		try {
-			int getX_pre = getX();
-			int getY_pre = getY();
-			boolean isDroitier_pre = isDroitier();
+			boolean isDroitier_atPre = isDroitier();
+			int getX_atPre = getX();
+			int getY_atPre = getY();
 			int getFalling_atPre = getFalling();
-			 int getDalles_Pre = getDalles();
+			int getDalles_atPre = getDalles();
+			int getBomberDelay_atPre = getBomberDelay();
+			int getBasherDelay_atPre = getBasherDelay();
+			
 			checkInvariants();
 			super.step();	
 			checkInvariants();
-			checkStepPostConditions(getX_pre, getY_pre, isDroitier_pre, getFalling_atPre, getDalles_Pre);
+			checkStepPostConditions(getX_atPre, getY_atPre, isDroitier_atPre,
+					getFalling_atPre, getDalles_atPre, getBomberDelay_atPre, getBasherDelay_atPre);
 		} catch (ContractError e) {			
 			ErrorHandler.printError(e);			
 			throw e;			
 		}		
 	}
 
-	private void checkStepPostConditions(int getX_pre, int getY_pre, boolean isDroitier_pre, int getFalling_atPre, int getDalles_Pre) {
+	private void checkStepPostConditions(int getX_atPre, int getY_atPre, 
+			boolean isDroitier_atPre, int getFalling_atPre, int getDalles_atPre, 
+			int getBomberDelay_atPre, int getBasherDelay_atPre) {
 		if (getComportement().contains(Comportement.WALKER)) {
 			// cas n°1
-			if (!(getGameEng().isObstacle(getX_pre,getY_pre+1))) {
-				if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_pre && getY() == getY_pre && isDroitier() == isDroitier_pre && getFalling() == 0 )) {
+			if (!(getGameEng().isObstacle(getX_atPre,getY_atPre+1))) {
+				if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_atPre && getY() == getY_atPre && isDroitier() == isDroitier_atPre && getFalling() == 0 )) {
 					throw new PostConditionError("step : cas n°1");
 				}
 			}
 			// cas n°2.a
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getGameEng().isObstacle(getX_pre+1,getY_pre-1) && isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre && getY() == getY_pre && isDroitier() == false && getFalling() == 0 )) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getGameEng().isObstacle(getX_atPre+1,getY_atPre-1) && isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre && getY() == getY_atPre && isDroitier() == false && getFalling() == 0 )) {
 					throw new PostConditionError("step : cas n°2.a");
 				}
 			}
 			// cas n°2.b
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getGameEng().isObstacle(getX_pre-1,getY_pre-1) && !isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre && getY() == getY_pre && isDroitier() == true && getFalling() == 0 )) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getGameEng().isObstacle(getX_atPre-1,getY_atPre-1) && !isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre && getY() == getY_atPre && isDroitier() == true && getFalling() == 0 )) {
 					throw new PostConditionError("step : cas n°2.b");
 				}
 			}
 			// cas n°3.a
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getGameEng().isObstacle(getX_pre+1,getY_pre) && getGameEng().isObstacle(getX_pre+1,getY_pre-2) && isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre && getY() == getY_pre && isDroitier() == false && getFalling() == 0)) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getGameEng().isObstacle(getX_atPre+1,getY_atPre) && getGameEng().isObstacle(getX_atPre+1,getY_atPre-2) && isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre && getY() == getY_atPre && isDroitier() == false && getFalling() == 0)) {
 					throw new PostConditionError("step : cas n°3.a");
 				}
 			}
 			// cas n°3.b
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getGameEng().isObstacle(getX_pre-1,getY_pre) && getGameEng().isObstacle(getX_pre-1,getY_pre-2) && !isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre && getY() == getY_pre && isDroitier() == true && getFalling() == 0)) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getGameEng().isObstacle(getX_atPre-1,getY_atPre) && getGameEng().isObstacle(getX_atPre-1,getY_atPre-2) && !isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre && getY() == getY_atPre && isDroitier() == true && getFalling() == 0)) {
 					throw new PostConditionError("step : cas n°3.b");
 				}
 			}
 			// cas n°4.a
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getGameEng().isObstacle(getX_pre+1,getY_pre) && !getGameEng().isObstacle(getX_pre+1,getY_pre-1) && !getGameEng().isObstacle(getX_pre+1,getY_pre-2) && isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre+1 && getY() == getY_pre-1 && isDroitier() == true && getFalling() == 0)) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getGameEng().isObstacle(getX_atPre+1,getY_atPre) && !getGameEng().isObstacle(getX_atPre+1,getY_atPre-1) && !getGameEng().isObstacle(getX_atPre+1,getY_atPre-2) && isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre+1 && getY() == getY_atPre-1 && isDroitier() == true && getFalling() == 0)) {
 					throw new PostConditionError("step : cas n°4.a");
 				}
 			}
 			// cas n°4.b
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getGameEng().isObstacle(getX_pre-1,getY_pre) && !getGameEng().isObstacle(getX_pre-1,getY_pre-1) && !getGameEng().isObstacle(getX_pre-1,getY_pre-2) && !isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre-1 && getY() == getY_pre-1 && isDroitier() == false && getFalling() == 0)) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getGameEng().isObstacle(getX_atPre-1,getY_atPre) && !getGameEng().isObstacle(getX_atPre-1,getY_atPre-1) && !getGameEng().isObstacle(getX_atPre-1,getY_atPre-2) && !isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre-1 && getY() == getY_atPre-1 && isDroitier() == false && getFalling() == 0)) {
 					throw new PostConditionError("step : cas n°4.b");
 				}
 			}
 			// cas n°5.a
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && !getGameEng().isObstacle(getX_pre+1,getY_pre) && !getGameEng().isObstacle(getX_pre+1,getY_pre-1) && isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre+1 && getY() == getY_pre && isDroitier() == true && getFalling() == 0)) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && !getGameEng().isObstacle(getX_atPre+1,getY_atPre) && !getGameEng().isObstacle(getX_atPre+1,getY_atPre-1) && isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre+1 && getY() == getY_atPre && isDroitier() == true && getFalling() == 0)) {
 					throw new PostConditionError("step : cas n°5.a");
 				}
 			}
 			// cas n°5.b
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && !getGameEng().isObstacle(getX_pre-1,getY_pre) && !getGameEng().isObstacle(getX_pre-1,getY_pre-1) && !isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre-1 && getY() == getY_pre && isDroitier() == false && getFalling() == 0)) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && !getGameEng().isObstacle(getX_atPre-1,getY_atPre) && !getGameEng().isObstacle(getX_atPre-1,getY_atPre-1) && !isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre-1 && getY() == getY_atPre && isDroitier() == false && getFalling() == 0)) {
 					throw new PostConditionError("step : cas n°5.b");
 				}
 			}
 		}
 		if (getComportement().contains(Comportement.FALLER) && !getComportement().contains(Comportement.CLIMBER)) {
 			// cas n°6.a
-			if (!getGameEng().isObstacle(getX_pre,getY_pre+1) && getFalling() < 8 && isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_pre && getY() == getY_pre+1 && isDroitier() == true && getFalling() == getFalling_atPre+1)) {
+			if (!getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() < 8 && isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_atPre && getY() == getY_atPre+1 && isDroitier() == true && getFalling() == getFalling_atPre+1)) {
 					throw new PostConditionError("step : cas n°6.a");
 				}
 			}
 			// cas n°6.b
-			if (!getGameEng().isObstacle(getX_pre,getY_pre+1) && getFalling() < 8 && !isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_pre && getY() == getY_pre+1 && isDroitier() == false && getFalling() == getFalling_atPre+1)) {
+			if (!getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() < 8 && !isDroitier_atPre) {
+				if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_atPre && getY() == getY_atPre+1 && isDroitier() == false && getFalling() == getFalling_atPre+1)) {
 					throw new PostConditionError("step : cas n°6.b");
 				}
 			}
 			// cas n°7.a
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getFalling() < 8 && isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre && getY() == getY_pre && isDroitier() == true && getFalling() == 0)) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() < 8 && isDroitier_atPre) {
+				if (!(!getComportement().contains(Comportement.FALLER) && getComportement().contains(Comportement.WALKER) && getX() == getX_atPre && getY() == getY_atPre && isDroitier() == true && getFalling() == 0)) {
 					throw new PostConditionError("step : cas n°7.a");
 				}
 			}
 			// cas n°7.b
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getFalling() < 8 && !isDroitier_pre) {
-				if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre && getY() == getY_pre && isDroitier() == false && getFalling() == 0)) {
+			if (getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() < 8 && !isDroitier_atPre) {
+				if (!(!getComportement().contains(Comportement.FALLER) && getComportement().contains(Comportement.WALKER) && getX() == getX_atPre && getY() == getY_atPre && isDroitier() == false && getFalling() == 0)) {
 					throw new PostConditionError("step : cas n°7.b");
 				}
 			}
 			// cas n°8.a
-			if (getGameEng().isObstacle(getX_pre,getY_pre+1) && getFalling() == 8) {
+			if (!getComportement().contains(Comportement.CLIMBER) && getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() == 8) {
 				if (!isDead()) {
 					throw new PostConditionError("step : cas n°8.a");
 				}
@@ -233,22 +239,22 @@ public class LemmingContract extends LemmingDecorator {
 			if (getComportement().contains(Comportement.DIGGER)) {
 				// cas n°9
 				if (getGameEng().getLevel().getNature(getX(), getY()+1) == Nature.EMPTY) {
-					if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_pre && getY() == getY_pre && getFalling() == 0)) {
+					if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_atPre && getY() == getY_atPre && getFalling() == 0)) {
 						throw new PostConditionError("step : cas n°9");
 					}
 				}
 				// cas n°10
 				if (getGameEng().getLevel().getNature(getX(), getY()+1) == Nature.METAL) {
-					if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_pre && getY() == getY_pre && getFalling() == 0)) {
+					if (!(getComportement().contains(Comportement.WALKER) && getX() == getX_atPre && getY() == getY_atPre && getFalling() == 0)) {
 						throw new PostConditionError("step : cas n°10");
 					}
 				}
 				// cas n°11
 				if (getGameEng().getLevel().getNature(getX(), getY()+1) == Nature.DIRT) {
-					if (!(getComportement().contains(Comportement.DIGGER) && getX() == getX_pre && getY() == getY_pre+1 && getFalling() == 0 
-							&& getGameEng().getLevel().getNature(getX_pre, getY_pre+1) == Nature.EMPTY
-							&& getGameEng().getLevel().getNature(getX_pre-1, getY_pre+1) != Nature.DIRT 
-						    && getGameEng().getLevel().getNature(getX_pre+1, getY_pre+1) != Nature.DIRT)) {
+					if (!(getComportement().contains(Comportement.DIGGER) && getX() == getX_atPre && getY() == getY_atPre+1 && getFalling() == 0 
+							&& getGameEng().getLevel().getNature(getX_atPre, getY_atPre+1) == Nature.EMPTY
+							&& getGameEng().getLevel().getNature(getX_atPre-1, getY_atPre+1) != Nature.DIRT 
+						    && getGameEng().getLevel().getNature(getX_atPre+1, getY_atPre+1) != Nature.DIRT)) {
 						
 						throw new PostConditionError("step : cas n°11");
 					}
@@ -256,42 +262,42 @@ public class LemmingContract extends LemmingDecorator {
 			}
 			if (getComportement().contains(Comportement.CLIMBER)) {
 				// cas n°12.a
-				if (isDroitier_pre && getComportement().contains(Comportement.CLIMBER) 
-				 && getGameEng().isObstacle(getX_pre+1,getY_pre) 
-				 && getGameEng().isObstacle(getX_pre+1,getY_pre+1) 
-				 && getGameEng().getLevel().getNature(getX_pre, getY_pre+1) == Nature.EMPTY
-				 && getGameEng().getLevel().getNature(getX_pre, getY_pre+2) == Nature.EMPTY) {
-					if (!(isDroitier() == true && getComportement().contains(Comportement.CLIMBER) && getX() == getX_pre && getY() == getY_pre+1)) {
+				if (isDroitier_atPre && getComportement().contains(Comportement.CLIMBER) 
+				 && getGameEng().isObstacle(getX_atPre+1,getY_atPre) 
+				 && getGameEng().isObstacle(getX_atPre+1,getY_atPre+1) 
+				 && getGameEng().getLevel().getNature(getX_atPre, getY_atPre+1) == Nature.EMPTY
+				 && getGameEng().getLevel().getNature(getX_atPre, getY_atPre+2) == Nature.EMPTY) {
+					if (!(isDroitier() == true && getComportement().contains(Comportement.CLIMBER) && getX() == getX_atPre && getY() == getY_atPre+1)) {
 						throw new PostConditionError("step : cas n°12.a");
 					}
 				}
 				// cas n°12.b
-				if (!isDroitier_pre && getComportement().contains(Comportement.CLIMBER) 
-				 && getGameEng().isObstacle(getX_pre-1,getY_pre) 
-				 && getGameEng().isObstacle(getX_pre-1,getY_pre+1) 
-				 && getGameEng().getLevel().getNature(getX_pre, getY_pre+1) == Nature.EMPTY
-				 && getGameEng().getLevel().getNature(getX_pre, getY_pre+2) == Nature.EMPTY) {
-					if (!(isDroitier() == false && getComportement().contains(Comportement.CLIMBER) && getX() == getX_pre && getY() == getY_pre+1)) {
+				if (!isDroitier_atPre && getComportement().contains(Comportement.CLIMBER) 
+				 && getGameEng().isObstacle(getX_atPre-1,getY_atPre) 
+				 && getGameEng().isObstacle(getX_atPre-1,getY_atPre+1) 
+				 && getGameEng().getLevel().getNature(getX_atPre, getY_atPre+1) == Nature.EMPTY
+				 && getGameEng().getLevel().getNature(getX_atPre, getY_atPre+2) == Nature.EMPTY) {
+					if (!(isDroitier() == false && getComportement().contains(Comportement.CLIMBER) && getX() == getX_atPre && getY() == getY_atPre+1)) {
 						throw new PostConditionError("step : cas n°12.b");
 					}
 				}
 				// cas n°13.a
-				if (isDroitier_pre && getComportement().contains(Comportement.CLIMBER) 
-				 && getGameEng().isObstacle(getX_pre+1,getY_pre) 
-				 && getGameEng().getLevel().getNature(getX_pre+1, getY_pre+1) == Nature.EMPTY
-				 && getGameEng().getLevel().getNature(getX_pre, getY_pre+1) == Nature.EMPTY
-				 && getGameEng().getLevel().getNature(getX_pre, getY_pre+2) == Nature.EMPTY) {
-					if (!(isDroitier() == true && getComportement().contains(Comportement.CLIMBER) && getX() == getX_pre+1 && getY() == getY_pre+1)) {
+				if (isDroitier_atPre && getComportement().contains(Comportement.CLIMBER) 
+				 && getGameEng().isObstacle(getX_atPre+1,getY_atPre) 
+				 && getGameEng().getLevel().getNature(getX_atPre+1, getY_atPre+1) == Nature.EMPTY
+				 && getGameEng().getLevel().getNature(getX_atPre, getY_atPre+1) == Nature.EMPTY
+				 && getGameEng().getLevel().getNature(getX_atPre, getY_atPre+2) == Nature.EMPTY) {
+					if (!(isDroitier() == true && getComportement().contains(Comportement.CLIMBER) && getX() == getX_atPre+1 && getY() == getY_atPre+1)) {
 						throw new PostConditionError("step : cas n°13.a");
 					}
 				}
 				// cas n°13.b
-				if (!isDroitier_pre && getComportement().contains(Comportement.CLIMBER) 
-				 && getGameEng().isObstacle(getX_pre-1,getY_pre) 
-				 && getGameEng().getLevel().getNature(getX_pre-1, getY_pre+1) == Nature.EMPTY
-				 && getGameEng().getLevel().getNature(getX_pre, getY_pre+1) == Nature.EMPTY
-				 && getGameEng().getLevel().getNature(getX_pre, getY_pre+2) == Nature.EMPTY) {
-					if (!(isDroitier() == isDroitier_pre && getComportement().contains(Comportement.CLIMBER) && getX() == getX_pre-1 && getY() == getY_pre+1)) {
+				if (!isDroitier_atPre && getComportement().contains(Comportement.CLIMBER) 
+				 && getGameEng().isObstacle(getX_atPre-1,getY_atPre) 
+				 && getGameEng().getLevel().getNature(getX_atPre-1, getY_atPre+1) == Nature.EMPTY
+				 && getGameEng().getLevel().getNature(getX_atPre, getY_atPre+1) == Nature.EMPTY
+				 && getGameEng().getLevel().getNature(getX_atPre, getY_atPre+2) == Nature.EMPTY) {
+					if (!(isDroitier() == isDroitier_atPre && getComportement().contains(Comportement.CLIMBER) && getX() == getX_atPre-1 && getY() == getY_atPre+1)) {
 						throw new PostConditionError("step : cas n°13.b");
 					}
 				}				 
@@ -301,75 +307,132 @@ public class LemmingContract extends LemmingDecorator {
 					&& getGameEng().getLevel().getNature(getX() + 1, getY()) == Nature.EMPTY
 					&& getGameEng().getLevel().getNature(getX() + 2, getY()) == Nature.EMPTY
 					&& getGameEng().getLevel().getNature(getX() + 3, getY()) == Nature.EMPTY && getDalles() < 12
-					&& getTourIncr() == 0) {
+					&& getBuilderDelay() == 0) {
 
-				if (!(getTourIncr() == 1))
+				if (!(getBuilderDelay() == 1))
 					throw new PostConditionError("step : cas 1 builder");
 			}
 			// cas 2 builder
-			if (getComportement().contains(Comportement.BUILDER) && getDalles() < 12 && getTourIncr() == 1) {
+			if (getComportement().contains(Comportement.BUILDER) && getDalles() < 12 && getBuilderDelay() == 1) {
 
-				if (!((getTourIncr() == 2) && getComportement().contains(Comportement.BUILDER)))
+				if (!((getBuilderDelay() == 2) && getComportement().contains(Comportement.BUILDER)))
 					throw new PostConditionError("step : cas 2 builder");
 			}
 			// cas 3 builder
-			if (getComportement().contains(Comportement.BUILDER) && getDalles() < 12 && getTourIncr() == 2) {
+			if (getComportement().contains(Comportement.BUILDER) && getDalles() < 12 && getBuilderDelay() == 2) {
 
-				if (!((getTourIncr() == 3) && getComportement().contains(Comportement.BUILDER)))
+				if (!((getBuilderDelay() == 3) && getComportement().contains(Comportement.BUILDER)))
 					throw new PostConditionError("step : cas 3 builder");
 			}
 			// cas 4 builder
-			if (getComportement().contains(Comportement.BUILDER) && getDalles() < 12 && getTourIncr() == 3) {
-				if (!(getComportement().contains(Comportement.BUILDER) && getTourIncr() == 0
-						&& getDalles() == getDalles_Pre + 1
-						&& getGameEng().getLevel().getNature(getX_pre + 1, getY_pre) == Nature.DIRT
-						&& getGameEng().getLevel().getNature(getX_pre + 2, getY_pre) == Nature.DIRT
-						&& getGameEng().getLevel().getNature(getX_pre + 3, getY_pre) == Nature.DIRT
-						&& getX() == getX_pre + 2 && getY() == getY_pre - 1))
+			if (getComportement().contains(Comportement.BUILDER) && getDalles() < 12 && getBuilderDelay() == 3) {
+				if (!(getComportement().contains(Comportement.BUILDER) && getBuilderDelay() == 0
+						&& getDalles() == getDalles_atPre + 1
+						&& getGameEng().getLevel().getNature(getX_atPre + 1, getY_atPre) == Nature.DIRT
+						&& getGameEng().getLevel().getNature(getX_atPre + 2, getY_atPre) == Nature.DIRT
+						&& getGameEng().getLevel().getNature(getX_atPre + 3, getY_atPre) == Nature.DIRT
+						&& getX() == getX_atPre + 2 && getY() == getY_atPre - 1))
 					throw new PostConditionError("step : cas 3 builder");
 			// cas 1 floater
 			} if (getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
-					&& getGameEng().getTour() % 2 == 0 && isDroitier_pre
-					&& !getGameEng().isObstacle(getX_pre, getY_pre + 1)) {
+					&& getGameEng().getTour() % 2 == 0 && isDroitier_atPre
+					&& !getGameEng().isObstacle(getX_atPre, getY_atPre + 1)) {
 				if (!(getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
-						&& getX() == getX_pre && getY() == getY_pre + 1 && isDroitier()
+						&& getX() == getX_atPre && getY() == getY_atPre + 1 && isDroitier()
 						&& getFalling() == getFalling_atPre))
 					throw new PostConditionError("step : cas 1 floater");
 			// cas 2 floater
 			} if (getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
-					&& getGameEng().getTour() % 2 == 1 && isDroitier_pre
-					&& !getGameEng().isObstacle(getX_pre, getY_pre + 1))
+					&& getGameEng().getTour() % 2 == 1 && isDroitier_atPre
+					&& !getGameEng().isObstacle(getX_atPre, getY_atPre + 1))
 				if (!(getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
-						&& getX() == getX_pre && getY() == getY_pre && isDroitier()
+						&& getX() == getX_atPre && getY() == getY_atPre && isDroitier()
 						&& getFalling() == getFalling_atPre))
 					throw new PostConditionError("step : cas 2 floater");
 			// cas 3 floater
 			} if (getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
-				&& getGameEng().getTour() % 2 == 0 && !isDroitier_pre
-				&& !getGameEng().isObstacle(getX_pre, getY_pre + 1)) {
-			if (!(getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
-					&& getX() == getX_pre && getY() == getY_pre + 1 && !isDroitier()
+				&& getGameEng().getTour() % 2 == 0 && !isDroitier_atPre
+				&& !getGameEng().isObstacle(getX_atPre, getY_atPre + 1)) {
+				if (!(getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
+					&& getX() == getX_atPre && getY() == getY_atPre + 1 && !isDroitier()
 					&& getFalling() == getFalling_atPre))
 				throw new PostConditionError("step : cas 3 floater");
 			// cas 4 floater
 			} if (getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
-				&& getGameEng().getTour() % 2 == 1 && !isDroitier_pre
-				&& !getGameEng().isObstacle(getX_pre, getY_pre + 1)) {
-			if (!(getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
-					&& getX() == getX_pre && getY() == getY_pre && !isDroitier()
+				&& getGameEng().getTour() % 2 == 1 && !isDroitier_atPre
+				&& !getGameEng().isObstacle(getX_atPre, getY_atPre + 1)) {
+				if (!(getComportement().contains(Comportement.FLOATER) && getComportement().contains(Comportement.FALLER)
+					&& getX() == getX_atPre && getY() == getY_atPre && !isDroitier()
 					&& getFalling() == getFalling_atPre))
 				throw new PostConditionError("step : cas 1 floater");
 			// cas 1 STOPPER
 			} if (getComportement().contains(Comportement.STOPPER)) {
-				if (!(getGameEng().isObstacle(getX_pre, getY_pre) && (getGameEng().isObstacle(getX_pre, getY_pre -1)))) {
+				if (!(getGameEng().isObstacle(getX_atPre, getY_atPre) && (getGameEng().isObstacle(getX_atPre, getY_atPre -1)))) {
 						throw new PostConditionError("step : cas 1 floater");	
 				}
-			} 
+			}
+			// cas 1 BOMBER
+			if (getComportement().contains(Comportement.BOMBER) && getBomberDelay() > 0) {
+				if (!(getBomberDelay() == getBomberDelay_atPre-1)) {
+					throw new PostConditionError("step : cas 1 BOMBER");
+				}
+			}
+			// cas 2 BOMBER
+			if (getComportement().contains(Comportement.BOMBER) && getBomberDelay() == 0) {
+				if (!(isDead() == true
+				   && getGameEng().getLevel().getNature(getX(), getY()+1) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX(), getY()-1) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()+1, getY()+1) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()-1, getY()+1) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()+1, getY()) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()-1, getY()) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()+2, getY()) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()-2, getY()) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()+1, getY()-1) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()-1, getY()-1) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()+1, getY()-2) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()-1, getY()-2) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()+1, getY()-1) == Nature.DIRT
+				   && getGameEng().getLevel().getNature(getX()-1, getY()-1) == Nature.DIRT)) {
+					throw new PostConditionError("step : cas 2 BOMBER");
+				}
+			}
+			// cas 1 BASHER
+			if (getComportement().contains(Comportement.BASHER) && (getBasherDelay() == 0
+					|| getGameEng().getLevel().getNature(getX()+1, getY()) == Nature.METAL
+					|| getGameEng().getLevel().getNature(getX(), getY()-1) == Nature.EMPTY)) {
+				if (!(!getComportement().contains(Comportement.BASHER) && getComportement().contains(Comportement.WALKER))) {
+					throw new PostConditionError("step : cas 1 BASHER");
+				}
+			}
+			// cas 2 BASHER
+			if (getComportement().contains(Comportement.BASHER) && isDroitier() && getBasherDelay() > 0
+					&& getGameEng().getLevel().getNature(getX()+1, getY()) != Nature.METAL
+					&& getGameEng().getLevel().getNature(getX()+2, getY()) != Nature.METAL
+					&& getGameEng().getLevel().getNature(getX()+3, getY()) != Nature.METAL) {
+				if (!(getGameEng().getLevel().getNature(getX()+1, getY()) == Nature.EMPTY
+						&& getGameEng().getLevel().getNature(getX()+2, getY()) == Nature.EMPTY
+						&& getGameEng().getLevel().getNature(getX()+3, getY()) == Nature.EMPTY)
+						&& getBasherDelay() == getBasherDelay_atPre-1 && getX() == getX_atPre+1 && getY() == getY_atPre) {
+					throw new PostConditionError("step : cas 2 BASHER");
+				}
+			}
+			// cas 3 BASHER
+			if (getComportement().contains(Comportement.BASHER) && !isDroitier() && getBasherDelay() > 0
+					&& getGameEng().getLevel().getNature(getX()-1, getY()) != Nature.METAL
+					&& getGameEng().getLevel().getNature(getX()-2, getY()) != Nature.METAL
+					&& getGameEng().getLevel().getNature(getX()-3, getY()) != Nature.METAL) {
+				if (!(getGameEng().getLevel().getNature(getX()-1, getY()) == Nature.EMPTY
+						&& getGameEng().getLevel().getNature(getX()-2, getY()) == Nature.EMPTY
+						&& getGameEng().getLevel().getNature(getX()-3, getY()) == Nature.EMPTY)
+						&& getBasherDelay() == getBasherDelay_atPre-1 && getX() == getX_atPre-1 && getY() == getY_atPre) {
+					throw new PostConditionError("step : cas 3 BASHER");
+				}
+			}
 		}
 	
 	/**
-	 * changeComportement --------------------------------------------------------------------
-	 * TODO.....
+	 * changeComportement ------------------------------------------------------
 	 */
 	@Override
 	public void changeComportement(Comportement c) {

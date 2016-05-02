@@ -1,7 +1,6 @@
 package Lemmings.ihm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import Lemmings.services.ILemming;
 import Lemmings.services.ILevel;
@@ -10,24 +9,24 @@ import Lemmings.services.Nature;
 public class Ihm {
 
 	public void updatedraw(ILevel l, ArrayList<ILemming> lems) {
-		String[][] res = new String[l.width()][l.height()];
+		String[][] res = new String[l.getWidth()][l.getHeight()];
 		
-		for (int j = 0; j < l.height(); j++) {
-			for (int i = 0; i < l.width(); i++) {
+		for (int j = 0; j < l.getHeight(); j++) {
+			for (int i = 0; i < l.getWidth(); i++) {
 
-				if ((l.nature(i, j) == Nature.METAL)) {
+				if ((l.getNature(i, j) == Nature.METAL)) {
 				//	System.out.println("blalala "+ i +" "+ j);
-					if (i == l.width()-1) 
+					if (i == l.getWidth()-1) 
 			
 						res[i][j]= "M\n";
 					else
 						
 						res[i][j] = "M";
 				}
-				if (l.nature(i, j) == Nature.DIRT) {
+				if (l.getNature(i, j) == Nature.DIRT) {
 					res[i][j] = "D";
 				}
-				if (l.nature(i, j) == Nature.EMPTY) {
+				if (l.getNature(i, j) == Nature.EMPTY) {
 					if (!((l.getXExit() == i && l.getYExit() == j) || (l
 								.getXEntrance() == i && l.getYEntrance() == j))) 
 						res[i][j]=" ";
@@ -64,8 +63,8 @@ public class Ihm {
 		}
 		
 	
-		for (int j = 0; j < l.height(); j++) 
-			for (int i = 0; i < l.width(); i++) {
+		for (int j = 0; j < l.getHeight(); j++) 
+			for (int i = 0; i < l.getWidth(); i++) {
 	
 //			
 			System.out.print(res[i][j]);
