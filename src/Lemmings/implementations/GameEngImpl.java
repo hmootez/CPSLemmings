@@ -11,7 +11,6 @@ import Lemmings.tools.Nature;
 
 public class GameEngImpl implements IGameEng {
 
-	private int maxTour;
 	private int tour;
 	private int sizeColony;
 	private int spawnSpeed;
@@ -28,7 +27,6 @@ public class GameEngImpl implements IGameEng {
 	@Override
 	public void init(int sc, int sp, ILevel level) {
 		this.tour = 0;
-		this.maxTour = 50;
 		this.sizeColony = sc;
 		this.spawnSpeed = sp;
 		this.nbLemmingCreated = 0;
@@ -40,25 +38,25 @@ public class GameEngImpl implements IGameEng {
 	@Override
 	public void step() {
 		Ihm ihm = new Ihm();
-		for (int i = 0; i <= maxTour + 1; i++) { // FIXME < maxTour ou <= maxTour+1 ???
+		
+		while (!isGameOver()) {
 			
-			if (i % spawnSpeed == 0 && nbLemmingCreated < getSizeColony()) {
+			if (tour % spawnSpeed == 0 && nbLemmingCreated < getSizeColony()) {
 				ArrayList<Comportement> comportements = new ArrayList<Comportement>();
 				comportements.add(Comportement.FALLER);
 				activLemmings.add(new LemmingImpl(comportements, this));
 				nbLemmingCreated++;
-			}
-			if (isGameOver()) {
-				System.out.println(getScore());
-				break;
 			}
 			applyLemmingStep();
 			tour++;
 			ihm.updatedraw(getLevel(), getActivLemmings());
 		}
 		
-		System.out.println("-----------------End of game-----------------");
-		System.out.println("Saved: " + getNbLemmingCreated());
+		System.out.println("\n-----------------End of game-----------------");
+		System.out.println("Created: " + getNbLemmingCreated());
+		System.out.println("Saved: " + getNbLemmingSaved());
+		System.out.println("Score: " + getScore());
+		System.out.println("---------------------------------------------");
 	}
 
 	private void applyLemmingStep() {
@@ -82,11 +80,6 @@ public class GameEngImpl implements IGameEng {
 	@Override
 	public int getTour() {
 		return this.tour;
-	}
-
-	@Override
-	public int getMaxTour() {
-		return this.maxTour;
 	}
 	
 	@Override

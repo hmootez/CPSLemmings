@@ -2,7 +2,6 @@ package Lemmings.main;
 
 import Lemmings.implementations.GameEngImpl;
 import Lemmings.implementations.LevelImpl;
-import Lemmings.services.IGameEng;
 import Lemmings.services.ILevel;
 import Lemmings.tools.Nature;
 
@@ -10,30 +9,35 @@ public class LetsPlay {
 
 	public static void main(String[] args) {
 	
-		ILevel l = new LevelImpl(13, 11);
-		l.setNature(1, 4, Nature.METAL);
-		l.setNature(2, 4, Nature.METAL);
-		l.setNature(3, 4, Nature.METAL);
-		l.setNature(4, 4, Nature.METAL);
-		l.setNature(5, 4, Nature.METAL);
-		l.setNature(6, 4, Nature.METAL);
-		l.setNature(7, 4, Nature.METAL);
-		l.setNature(8, 4, Nature.METAL);
-		l.setNature(9, 4, Nature.METAL);
-		l.setNature(10, 4, Nature.METAL);
+		ILevel level = new LevelImpl(13, 11);
 		
-		l.setNature(2, 7, Nature.METAL);
-		l.setNature(3, 7, Nature.METAL);
-		l.setNature(4, 7, Nature.METAL);
-		l.setNature(5, 7, Nature.METAL);
-		l.setNature(6, 7, Nature.METAL);
-		l.setNature(7, 7, Nature.METAL);
-		l.setNature(8, 7, Nature.METAL);
-		l.setNature(9, 7, Nature.METAL);
-		l.setNature(10, 7, Nature.METAL);
-		l.setNature(11, 7, Nature.METAL);
+		if (level.isEditing()) {
+			level.setNature(1, 4, Nature.METAL);
+			level.setNature(2, 4, Nature.METAL);
+			level.setNature(3, 4, Nature.METAL);
+			level.setNature(4, 4, Nature.METAL);
+			level.setNature(5, 4, Nature.METAL);
+			level.setNature(6, 4, Nature.METAL);
+			level.setNature(7, 4, Nature.METAL);
+			level.setNature(8, 4, Nature.METAL);
+			level.setNature(9, 4, Nature.METAL);
+			level.setNature(10, 4, Nature.METAL);
+			
+			level.setNature(2, 7, Nature.METAL);
+			level.setNature(3, 7, Nature.METAL);
+			level.setNature(4, 7, Nature.METAL);
+			level.setNature(5, 7, Nature.METAL);
+			level.setNature(6, 7, Nature.METAL);
+			level.setNature(7, 7, Nature.METAL);
+			level.setNature(8, 7, Nature.METAL);
+			level.setNature(9, 7, Nature.METAL);
+			level.setNature(10, 7, Nature.METAL);
+			level.setNature(11, 7, Nature.METAL);
+		}
 		
-		IGameEng g = new GameEngImpl(5, 2, l);
+		level.goPlay(2, 1, 10, 9);
+		new GameEngImpl(5, 2, level);
+
 //		
 //		JoueurImpl j  = new JoueurImpl("adel", 8);
 //

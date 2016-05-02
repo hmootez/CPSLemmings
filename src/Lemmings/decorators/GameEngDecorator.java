@@ -25,11 +25,6 @@ public abstract class GameEngDecorator implements IGameEng {
 	}
 
 	@Override
-	public int getMaxTour() {
-		return delegate.getMaxTour();
-	}
-	
-	@Override
 	public int getScore() {
 		return delegate.getScore();
 	}

@@ -12,7 +12,6 @@ public interface IGameEng {
 	// OBSERVATORS -------------------------------------------------------------
 	public boolean isObstacle(int x,int y);
 	public int getTour();
-	public int getMaxTour(); /* const */
 	/**  \pre : isGameOver() == true */ 
 	public int getScore();
 	public boolean isGameOver();
@@ -28,7 +27,6 @@ public interface IGameEng {
 	// INVARIANTS --------------------------------------------------------------
 	/**
 	 *  \inv : getNbNemmingCreated() <= getSizeColony()
-	 *  \inv : getTour() <= getMaxTour()
 	 *  \inv : isObstacle(x,y) == {
 	 *  						  true <==> (ILevel::getNature(x,y) == (Nature.DIRT || Nature.METAL))
 	 *                            false <==> (ILevel::getNature(x,y) == Nature.EMPTY)
@@ -47,7 +45,6 @@ public interface IGameEng {
 	/**
 	 *  \pre : sc > 0 && sp > 0
 	 *  \post : getTour(init(sc,sp,l)) == 0
-	 *  \post : getMaxTour(init(sc,sp,l)) == 50
 	 *  \post : getScore(init(sc,sp,l)) == 0
 	 *  \post : isGameOver(init(sc,sp,l)) == false
 	 *  \post : getSizeColony(init(sc,sp,l)) == sc
@@ -65,8 +62,8 @@ public interface IGameEng {
 	/**
 	 *  \pre : isGameOver() == false
 	 *  \post : getTour(step()) == getTour()@Pre + 1
-	 *  \post : getNbLemmingCreated(step()) ==  FOR i (0..getMaxTour()) 
-	 *  										(i % getSpawnSpeed() == 0 && getNbLemmingCreated() < getSizeColony()) <==> getNbLemmingCreated()@Pre + 1 
+	 *  \post : getNbLemmingCreated(step()) ==  WHILE (!isGameOver()) 
+	 *  										(getTour() % getSpawnSpeed() == 0 && getNbLemmingCreated() < getSizeColony()) <==> getNbLemmingCreated()@Pre + 1 
 	 *  \post : getNbLemmingSaved(step()) == FORALL ILemming IN getActivLemming()
 	 *  									 ILemming::isSaved() == true ==> getNbLemmingSaved()@Pre + 1
 	 *  \post : getLevel(step()) == getLevel()@Pre

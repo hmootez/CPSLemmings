@@ -90,8 +90,8 @@ public class LemmingImpl implements ILemming {
 	public void init(ArrayList<Comportement> c,IGameEng core) {
 		this.isDroitier = true;
 		this.comportement = c;
-		this.xLemming = getGameEng().getLevel().getXEntrance();
-		this.yLemming = getGameEng().getLevel().getYEntrance();
+		this.xLemming = core.getLevel().getXEntrance();
+		this.yLemming = core.getLevel().getYEntrance();
 		this.falling = 0;
 		this.core = core;
 		this.isDead = false;
@@ -223,7 +223,7 @@ public class LemmingImpl implements ILemming {
 				&& !(core.isObstacle(getX(), getY() + 1) && falling_atPre < 8)) {
 			
 			System.out.println("cas 6.a ");
-			System.out.println("Type (" + getX() + ", " + getY() + ") -> " + core.getLevel().getNature(getX(), getY()));
+			//System.out.println("Type (" + getX() + ", " + getY() + ") -> " + core.getLevel().getNature(getX(), getY()));
 			xLemming = getX_atPre;
 			yLemming = getY_atPre + 1;
 			isDroitier = true;
@@ -482,6 +482,6 @@ public class LemmingImpl implements ILemming {
 
 	@Override
 	public void changeComportement(Comportement c) {
-		comportement.add(c); //FIXME remove?
+		comportement.add(c); //FIXME .remove()?
 	}
 }
