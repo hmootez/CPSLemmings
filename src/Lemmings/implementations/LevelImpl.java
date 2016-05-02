@@ -14,6 +14,11 @@ public class LevelImpl implements ILevel {
 	private int xExit;
 	private int yExit;
 	
+	
+	public LevelImpl() {
+		init(100, 80);
+	}
+	
 	public LevelImpl(int width, int height) {
 		init(width, height);
 	}
