@@ -201,13 +201,13 @@ public class LemmingContract extends LemmingDecorator {
 		}
 		if (getComportement().contains(Comportement.FALLER) && !getComportement().contains(Comportement.CLIMBER)) {
 			// cas n°6.a
-			if (!getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() < 8 && isDroitier_atPre) {
+			if (!getGameEng().isObstacle(getX_atPre,getY_atPre+1) && isDroitier_atPre) {
 				if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_atPre && getY() == getY_atPre+1 && isDroitier() == true && getFalling() == getFalling_atPre+1)) {
 					throw new PostConditionError("step : cas n°6.a");
 				}
 			}
 			// cas n°6.b
-			if (!getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() < 8 && !isDroitier_atPre) {
+			if (!getGameEng().isObstacle(getX_atPre,getY_atPre+1) && !isDroitier_atPre) {
 				if (!(getComportement().contains(Comportement.FALLER) && getX() == getX_atPre && getY() == getY_atPre+1 && isDroitier() == false && getFalling() == getFalling_atPre+1)) {
 					throw new PostConditionError("step : cas n°6.b");
 				}
@@ -225,7 +225,7 @@ public class LemmingContract extends LemmingDecorator {
 				}
 			}
 			// cas n°8.a
-			if (!getComportement().contains(Comportement.CLIMBER) && getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() == 8) {
+			if (!getComportement().contains(Comportement.CLIMBER) && getGameEng().isObstacle(getX_atPre,getY_atPre+1) && getFalling() >= 8) {
 				if (!isDead()) {
 					throw new PostConditionError("step : cas n°8.a");
 				}

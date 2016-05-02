@@ -50,9 +50,9 @@ public class Ihm {
 		
 	    try {
 	    	// 2- Clear
-	    	for(int i = 0; i < 25; i++) {
-	    	    System.out.println("");
-	    	}
+//	    	for(int i = 0; i < 25; i++) {
+//	    	    System.out.println("");
+//	    	}
 	    	
 	    	// 3- Draw
 			for (int j = 0; j < l.getHeight(); j++) { 
@@ -62,7 +62,7 @@ public class Ihm {
 			}
 			
 			// 4- Wait
-	    	Thread.sleep(1000); // one second.
+	    	Thread.sleep(000); // one second.
 	        
 	    } catch(InterruptedException ex) {
 	        Thread.currentThread().interrupt();

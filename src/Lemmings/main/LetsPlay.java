@@ -7,12 +7,23 @@ import Lemmings.tools.Nature;
 
 public class LetsPlay {
 
-	public static void main(String[] args) {
+	static final int WIDTH = 13;
+	static final int HEIGHT = 16;//11
 	
-		ILevel level = new LevelImpl(13, 11);
+	static final int X_ENTRANCE = 2;
+	static final int Y_ENTRANCE = 1;
+	static final int X_EXIT = 10;
+	static final int Y_EXIT = 9;
+	
+	static final int SIZE_COLONY = 1;//5
+	static final int SPAWN_SPEED = 2;
+	
+	public static void main(String[] args) {
+		
+		ILevel level = new LevelImpl(WIDTH, HEIGHT);
 		
 		if (level.isEditing()) {
-			level.setNature(1, 4, Nature.METAL);
+			/*level.setNature(1, 4, Nature.METAL);
 			level.setNature(2, 4, Nature.METAL);
 			level.setNature(3, 4, Nature.METAL);
 			level.setNature(4, 4, Nature.METAL);
@@ -32,11 +43,11 @@ public class LetsPlay {
 			level.setNature(8, 7, Nature.METAL);
 			level.setNature(9, 7, Nature.METAL);
 			level.setNature(10, 7, Nature.METAL);
-			level.setNature(11, 7, Nature.METAL);
+			level.setNature(11, 7, Nature.METAL);*/
 		}
 		
-		level.goPlay(2, 1, 10, 9);
-		new GameEngImpl(5, 2, level);
+		level.goPlay(X_ENTRANCE, Y_ENTRANCE, X_EXIT, Y_EXIT);
+		new GameEngImpl(SIZE_COLONY, SPAWN_SPEED, level);
 
 //		
 //		JoueurImpl j  = new JoueurImpl("adel", 8);

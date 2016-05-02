@@ -109,10 +109,10 @@ public interface ILemming {
 	 *  	==> Comportement.WALKER IN getComportement() && getX() = getX()@pre -1 && getY() = getY()@pre && isDroitier() = false && getFalling() = 0
 	 *  
 	 *  -------------------------------- FALLER --------------------------------
-	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = True && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling()@pre < 8 
+	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = True && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) 
 	 *  	==> Comportement.FALLER IN getComportement() && getX() = getX()@pre  && getY() = getY()@pre +1 && isDroitier() = True && getFalling() = getFalling()@pre +1
 	 *  
-	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = false && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling() < 8 
+	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = false && !(IGameEng::isObstacle(getX()@pre,getY()@pre+1) 
 	 *  	==> Comportement.FALLER IN getComportement() && getX() = getX()@pre  && getY() = getY()@pre +1 && isDroitier() = false && getFalling() = getFalling()@pre +1
 	 *  
 	 *  \post : Comportement.FALLER IN getComportement() && Comportement.CLIMBER NOT IN getComportement() && isDroitier()@pre = True && (IGameEng::isObstacle(getX()@pre,getY()@pre+1) && getFalling() < 8 

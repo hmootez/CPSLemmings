@@ -39,8 +39,10 @@ public class GameEngImpl implements IGameEng {
 	public void step() {
 		Ihm ihm = new Ihm();
 		
+		//int test = 20;
+		//while (test > 0) {
 		while (!isGameOver()) {
-			
+		
 			if (tour % spawnSpeed == 0 && nbLemmingCreated < getSizeColony()) {
 				ArrayList<Comportement> comportements = new ArrayList<Comportement>();
 				comportements.add(Comportement.FALLER);
@@ -49,6 +51,7 @@ public class GameEngImpl implements IGameEng {
 			}
 			applyLemmingStep();
 			tour++;
+			//test--;
 			ihm.updatedraw(getLevel(), getActivLemmings());
 		}
 		
@@ -63,7 +66,9 @@ public class GameEngImpl implements IGameEng {
 		for (ILemming lem : (ArrayList<ILemming>)activLemmings.clone()) {
 			lem.step();
 			if (lem.isDead()) {
+				System.out.println("Removing lemm...");
 				this.activLemmings.remove(lem);
+				System.out.println("activLemmings.size(): " + activLemmings.size());
 			}
 			if (lem.isSaved()) { 
 				nbLemmingSaved++ ; 
@@ -89,7 +94,7 @@ public class GameEngImpl implements IGameEng {
 
 	@Override
 	public boolean isGameOver() {
-		return (getNbLemmingSaved() == getSizeColony() && activLemmings.size() == 0); 
+		return (getNbLemmingCreated() == getSizeColony() && activLemmings.size() == 0); 
 	}
 
 	@Override

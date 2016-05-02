@@ -113,9 +113,10 @@ public class LemmingImpl implements ILemming {
  
 		// Case 8.a:
 		if (getComportement().contains(Comportement.FALLER) && !getComportement().contains(Comportement.CLIMBER)
-				&& (core.isObstacle(getX(), getY() + 1) && falling_atPre == 8)) {
+				&& (core.isObstacle(getX(), getY() + 1) && falling_atPre >= 8)) {
 			System.out.println("cas 8.a");
 			isDead = true;
+			System.out.println(isDead);
 		// Case 8.b:
 		} else if (getX() == xExit && getY() == yExit) {
 			System.out.println("cas 8.b");
@@ -199,8 +200,10 @@ public class LemmingImpl implements ILemming {
 			// Case 5.a:
 		} else if (getComportement().contains(Comportement.WALKER)
 				&& isDroitier == true
-				&& (core.isObstacle(getX(), getY() +1)
-						&& !(core.isObstacle(getX() + 1, getY())) && !(core.isObstacle(getX() + 1, getY() -1)))) {
+				&& core.isObstacle(getX(), getY() +1)
+				&& !core.isObstacle(getX() + 1, getY()) 
+				&& !core.isObstacle(getX() + 1, getY() - 1)) {
+			
 			System.out.println("cas 5.a");
 			xLemming = getX_atPre + 1;
 			yLemming = getY_atPre;
@@ -209,29 +212,39 @@ public class LemmingImpl implements ILemming {
 			// Case 5.b:
 		} else if (getComportement().contains(Comportement.WALKER)
 				&& isDroitier == false
-				&& (core.isObstacle(getX(), getY() +1)
-						&& !(core.isObstacle(getX() - 1, getY())) && !(core
-							.isObstacle(getX() - 1, getY() - 1)))) {
+				&& core.isObstacle(getX(), getY() +1)
+				&& !core.isObstacle(getX() - 1, getY()) 
+				&& !core.isObstacle(getX() - 1, getY() - 1)) {
+			
 			System.out.println("cas 5.b");
 			xLemming = getX_atPre - 1;
 			yLemming = getY_atPre;
 			isDroitier = false;
 			falling = 0;
 			// Case 6.a:
-		} else if (getComportement().contains(Comportement.FALLER) && !getComportement().contains(Comportement.CLIMBER)
+		} else if (getComportement().contains(Comportement.FALLER) 
+				&& !getComportement().contains(Comportement.CLIMBER)
 				&& isDroitier == true
-				&& !(core.isObstacle(getX(), getY() + 1) && falling_atPre < 8)) {
+				&& !core.isObstacle(getX(), getY() + 1)) {
 			
 			System.out.println("cas 6.a ");
 			//System.out.println("Type (" + getX() + ", " + getY() + ") -> " + core.getLevel().getNature(getX(), getY()));
+			System.out.println("\\PRE");
+			System.out.println("X -> " + getX() + " Y -> " + getY());
+			System.out.println("falling -> " + falling);
 			xLemming = getX_atPre;
 			yLemming = getY_atPre + 1;
 			isDroitier = true;
 			falling = falling_atPre + 1;
+			System.out.println("\\POST");
+			System.out.println("X -> " + xLemming + " Y -> " + yLemming);
+			System.out.println("falling -> " + falling);
 			// Case 6.b:
-		} else if (getComportement().contains(Comportement.FALLER) && !getComportement().contains(Comportement.CLIMBER)
+		} else if (getComportement().contains(Comportement.FALLER) 
+				&& !getComportement().contains(Comportement.CLIMBER)
 				&& isDroitier == false
-				&& !(core.isObstacle(getX(), getY() + 1) && falling_atPre < 8)) {
+				&& !core.isObstacle(getX(), getY() + 1)) {
+			
 			System.out.println("cas 6b");
 			xLemming = getX_atPre;
 			yLemming = getY_atPre +1;
