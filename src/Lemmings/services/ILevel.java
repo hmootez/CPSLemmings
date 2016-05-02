@@ -12,6 +12,7 @@ public interface ILevel {
 	public int getHeight(); /* const */ 
 	public int getWidth(); /* const */
 	public boolean isEditing();
+	/** \pre : x => 0 && x <= width && y => 0 && y <= height*/
 	public Nature getNature(int x,int y);
 	public int getXEntrance(); 
 	public int getYEntrance();
@@ -53,7 +54,7 @@ public interface ILevel {
 	/**
 	 *  \pre : x > 0 && x <= getWidth() && y > 0 && y <= getHeight()
 	 *  \post : getNature(setNature(x,y,n),x,y) == n 
-	 *  \post : isEediting(setNature(x,y,n)) == isEediting()@Pre
+	 *  \post : isEditing(setNature(x,y,n)) == isEditing()@Pre
 	 *  \post : getXEntrance(setNature(x,y,n)) == getXEntrance()@Pre
 	 *  \post : getYEntrance(setNature(x,y,n)) == getYEntrance()@Pre
 	 *  \post : getXExit(setNature(x,y,n)) == getXExit()@Pre
