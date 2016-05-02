@@ -6,11 +6,11 @@ import Lemmings.implementations.GameEngImpl;
 import Lemmings.implementations.JoueurImpl;
 import Lemmings.implementations.LemmingImpl;
 import Lemmings.implementations.LevelImpl;
-import Lemmings.services.Comportement;
 import Lemmings.services.IGameEng;
 import Lemmings.services.IJoueur;
 import Lemmings.services.ILemming;
 import Lemmings.services.ILevel;
+import Lemmings.tools.Comportement;
 
 public class FactoryImpl implements IFacory {
 

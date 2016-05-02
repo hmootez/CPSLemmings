@@ -2,6 +2,8 @@ package Lemmings.services;
 
 import java.util.ArrayList;
 
+import Lemmings.tools.Comportement;
+
 public interface ILemming {
 	
 	// TYPES: bool, int, enum Comportement {WALKER, FALLER, DIGGER, CLIMBER, BUILDER, FLOATER, BOMBER, STOPPER, BASHER}

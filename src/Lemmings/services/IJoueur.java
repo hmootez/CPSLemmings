@@ -2,6 +2,8 @@ package Lemmings.services;
 
 import java.util.HashMap;
 
+import Lemmings.tools.Comportement;
+
 public interface IJoueur {
 	
 	// OBSERVATORS -------------------------------------------------------------

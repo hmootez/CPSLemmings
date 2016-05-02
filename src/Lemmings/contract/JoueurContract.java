@@ -6,9 +6,9 @@ import Lemmings.error.ErrorHandler;
 import Lemmings.error.InvariantError;
 import Lemmings.error.PostConditionError;
 import Lemmings.error.PreConditionError;
-import Lemmings.services.Comportement;
 import Lemmings.services.IJoueur;
 import Lemmings.services.ILemming;
+import Lemmings.tools.Comportement;
 
 public class JoueurContract extends JoueurDecorator {
 

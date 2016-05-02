@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Lemmings.services.ILemming;
 import Lemmings.services.ILevel;
-import Lemmings.services.Nature;
+import Lemmings.tools.Nature;
 
 public class Ihm {
 

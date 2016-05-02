@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
-import Lemmings.services.Comportement;
 import Lemmings.services.IJoueur;
 import Lemmings.services.ILemming;
+import Lemmings.tools.Comportement;
 
 public class JoueurImpl implements IJoueur {
 	

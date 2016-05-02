@@ -1,7 +1,7 @@
 package Lemmings.decorators;
 
 import Lemmings.services.ILevel;
-import Lemmings.services.Nature;
+import Lemmings.tools.Nature;
 
 public abstract class LevelDecorator implements ILevel {
 

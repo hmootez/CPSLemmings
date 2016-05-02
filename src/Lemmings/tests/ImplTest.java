@@ -4,7 +4,7 @@ import Lemmings.implementations.GameEngImpl;
 import Lemmings.implementations.LevelImpl;
 import Lemmings.services.IGameEng;
 import Lemmings.services.ILevel;
-import Lemmings.services.Nature;
+import Lemmings.tools.Nature;
 
 public class ImplTest {
 

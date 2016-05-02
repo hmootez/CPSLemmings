@@ -2,9 +2,9 @@ package Lemmings.decorators;
 
 import java.util.ArrayList;
 
-import Lemmings.services.Comportement;
 import Lemmings.services.IGameEng;
 import Lemmings.services.ILemming;
+import Lemmings.tools.Comportement;
 
 public abstract class LemmingDecorator implements ILemming {
 

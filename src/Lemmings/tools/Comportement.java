@@ -1,4 +1,4 @@
-package Lemmings.services;
+package Lemmings.tools;
 
 public enum Comportement {
 	WALKER,

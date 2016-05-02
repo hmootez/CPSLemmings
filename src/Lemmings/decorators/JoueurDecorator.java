@@ -2,9 +2,9 @@ package Lemmings.decorators;
 
 import java.util.HashMap;
 
-import Lemmings.services.Comportement;
 import Lemmings.services.IJoueur;
 import Lemmings.services.ILemming;
+import Lemmings.tools.Comportement;
 
 public abstract class JoueurDecorator implements IJoueur {
 	

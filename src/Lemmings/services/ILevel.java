@@ -1,5 +1,7 @@
 package Lemmings.services;
 
+import Lemmings.tools.Nature;
+
 public interface ILevel {
 	
 	// TYPES: bool, int, enum Nature {EMPTY, DIRT, METAL}

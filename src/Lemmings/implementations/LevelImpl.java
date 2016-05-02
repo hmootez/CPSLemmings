@@ -1,7 +1,7 @@
 package Lemmings.implementations;
 
 import Lemmings.services.ILevel;
-import Lemmings.services.Nature;
+import Lemmings.tools.Nature;
 
 public class LevelImpl implements ILevel {
 

@@ -10,7 +10,7 @@ import Lemmings.error.PreConditionError;
 import Lemmings.services.IGameEng;
 import Lemmings.services.ILemming;
 import Lemmings.services.ILevel;
-import Lemmings.services.Nature;
+import Lemmings.tools.Nature;
 
 public class GameEngContract extends GameEngDecorator {
 

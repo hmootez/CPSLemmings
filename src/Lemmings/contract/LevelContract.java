@@ -6,7 +6,7 @@ import Lemmings.error.ErrorHandler;
 import Lemmings.error.PostConditionError;
 import Lemmings.error.PreConditionError;
 import Lemmings.services.ILevel;
-import Lemmings.services.Nature;
+import Lemmings.tools.Nature;
 
 public class LevelContract extends LevelDecorator {
 

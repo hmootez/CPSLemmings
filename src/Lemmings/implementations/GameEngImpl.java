@@ -3,11 +3,11 @@ package Lemmings.implementations;
 import java.util.ArrayList;
 
 import Lemmings.ihm.Ihm;
-import Lemmings.services.Comportement;
 import Lemmings.services.IGameEng;
 import Lemmings.services.ILemming;
 import Lemmings.services.ILevel;
-import Lemmings.services.Nature;
+import Lemmings.tools.Comportement;
+import Lemmings.tools.Nature;
 
 public class GameEngImpl implements IGameEng {
 

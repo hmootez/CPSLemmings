@@ -1,3 +1,3 @@
-package Lemmings.services;
+package Lemmings.tools;
 
 public enum Nature {EMPTY,DIRT,METAL}
