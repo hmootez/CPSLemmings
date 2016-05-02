@@ -11,7 +11,7 @@ import Lemmings.services.ILemming;
 
 public class JoueurImpl implements IJoueur {
 	
-	HashMap<Comportement, Integer>  jetons;
+	HashMap<Comportement, Integer> jetons;
 	String name;
 	final int maxComportement = 4;
 
