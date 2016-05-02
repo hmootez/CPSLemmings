@@ -1,4 +1,4 @@
-package Lemmings.tests;
+package Lemmings.main;
 
 import Lemmings.implementations.GameEngImpl;
 import Lemmings.implementations.LevelImpl;
@@ -6,7 +6,7 @@ import Lemmings.services.IGameEng;
 import Lemmings.services.ILevel;
 import Lemmings.tools.Nature;
 
-public class ImplTest {
+public class LetsPlay {
 
 	public static void main(String[] args) {
 	

@@ -1,4 +1,4 @@
-package Lemmings.tests;
+package Lemmings.main;
 
 import java.util.Scanner;
 
