@@ -98,7 +98,8 @@ public interface ILevel {
 	/**
 	 *  \Pre : getNature(x,y) == Nature.DIRT
 	 *  \Pre : isEditing() == false
-	 *  \Pre : x != getXEntrance() && y != getYEntrance() && x != getXExit() && y != getYExit()
+	 *  \pre : x >= 0 && x < getWidth() && y => 0 && y < getHeight()
+	 *  \Pre : (x != getXEntrance() && y != getYEntrance()) && (x != getXExit() && y != getYExit())
 	 *  \post : getNature(remove(x,y),x,y) == Nature.EMPTY
 	 *  \post : isEditing(remove(x,y)) == isEditing()@Pre
 	 *  \post : getXEntrance(remove(x,y)) == getXEntrance()@Pre
@@ -112,6 +113,7 @@ public interface ILevel {
 	/**
 	 *  \Pre : getNature(x,y) == Nature.EMPTY
 	 *  \Pre : isEditing() == false
+	 *  \pre : x >= 0 && x < getWidth() && y => 0 && y < getHeight()
 	 *  \Pre : x != getXEntrance() && y != getYEntrance() && x != getXExit() && y != getYExit()
 	 *  \post : getNature(build(x,y),x,y) == Nature.DIRT
 	 *  \post : isEditing(build(x,y)) == isEditing()@Pre

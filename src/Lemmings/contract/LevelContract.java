@@ -246,7 +246,6 @@ public class LevelContract extends LevelDecorator {
 		}
 	}
 	
-	
 	/**
 	 * goEditing ---------------------------------------------------------------
 	 */
@@ -333,17 +332,23 @@ public class LevelContract extends LevelDecorator {
 		if (!(isEditing() == false)) {
 			throw new PostConditionError("remove : isEditing() != false");
 		}
-		if (!(x != getXEntrance())) {
-			throw new PostConditionError("remove : x == getXEntrance()");
+		if (!(x >= 0)) {
+			throw new PreConditionError("remove : x < 0");
 		}
-		if (!(y != getYEntrance())) {
-			throw new PostConditionError("remove : y == getYEntrance()");
+		if (!(x < getWidth())) {
+			throw new PreConditionError("remove : x >= getWidth()");
 		}
-		if (!(x != getXExit())) {
-			throw new PostConditionError("remove : x == getXExit()");
+		if (!(y >= 0)) {
+			throw new PreConditionError("remove : y < 0");
 		}
-		if (!(y != getYExit())) {
-			throw new PostConditionError("remove : y == getYExit()");
+		if (!(y < getHeight())) {
+			throw new PreConditionError("remove : y >= getHeight()");
+		}
+		if (!(x != getXEntrance() && y != getYEntrance())) {
+			throw new PostConditionError("remove : x == getXEntrance() && y == getYEntrance()");
+		}
+		if (!(x != getXExit() && y != getYExit())) {
+			throw new PostConditionError("remove : x == getXExit() && y == getYExit()");
 		}
 	}
 
@@ -400,17 +405,23 @@ public class LevelContract extends LevelDecorator {
 		if (!(isEditing() == false)) {
 			throw new PostConditionError("build : isEditing() != false");
 		}
-		if (!(x != getXEntrance())) {
-			throw new PostConditionError("build : x == getXEntrance()");
+		if (!(x >= 0)) {
+			throw new PreConditionError("build : x < 0");
 		}
-		if (!(y != getYEntrance())) {
-			throw new PostConditionError("build : y == getYEntrance()");
+		if (!(x < getWidth())) {
+			throw new PreConditionError("build : x >= getWidth()");
 		}
-		if (!(x != getXExit())) {
-			throw new PostConditionError("build : x == getXExit()");
+		if (!(y >= 0)) {
+			throw new PreConditionError("build : y < 0");
 		}
-		if (!(y != getYExit())) {
-			throw new PostConditionError("build : y == getYExit()");
+		if (!(y < getHeight())) {
+			throw new PreConditionError("build : y >= getHeight()");
+		}
+		if (!(x != getXEntrance() && y != getYEntrance())) {
+			throw new PostConditionError("build : x == getXEntrance() && y == getYEntrance()");
+		}
+		if (!(x != getXExit() && y != getYExit())) {
+			throw new PostConditionError("build : x == getXExit() && y == getYExit()");
 		}
 	}
 

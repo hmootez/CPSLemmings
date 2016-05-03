@@ -142,7 +142,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 0, 0, Nature.DIRT)
+	setNature(L, 0, 0, Nature.DIRT)
 Oracle : 
 	nature(L,0,0) = Nature.DIRT
 	isEditing(L) == isEditing(L)@pre
@@ -156,7 +156,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 0, 0, Nature.METAL)
+	setNature(L, 0, 0, Nature.METAL)
 Oracle : 
 	nature(L,0,0) = Nature.METAL
 	isEditing(L) == isEditing(L)@pre
@@ -170,7 +170,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 0, 0, Nature.EMPTY)
+	setNature(L, 0, 0, Nature.EMPTY)
 Oracle : 
 	nature(L,0,0) = Nature.EMPTY
 	isEditing(L) == isEditing(L)@pre
@@ -184,7 +184,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 99, 78, Nature.DIRT)
+	setNature(L, 99, 78, Nature.DIRT)
 Oracle : 
 	nature(L,99,78) = Nature.DIRT
 	isEditing(L) == isEditing(L)@pre
@@ -198,7 +198,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 99, 78, Nature.METAL)
+	setNature(L, 99, 78, Nature.METAL)
 Oracle : 
 	nature(L,99,78) = Nature.METAL
 	isEditing(L) == isEditing(L)@pre
@@ -212,7 +212,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 99, 78, Nature.EMPTY)
+	setNature(L, 99, 78, Nature.EMPTY)
 Oracle : 
 	nature(L,99,78) = Nature.EMPTY
 	isEditing(L) == isEditing(L)@pre
@@ -226,7 +226,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, 50, Nature.DIRT)
+	setNature(L, 50, 50, Nature.DIRT)
 Oracle : 
 	nature(L,50,50) = Nature.DIRT
 	isEditing(L) == isEditing(L)@pre
@@ -240,7 +240,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, 50, Nature.METAL)
+	setNature(L, 50, 50, Nature.METAL)
 Oracle : 
 	nature(L,50,50) = Nature.METAL
 	isEditing(L) == isEditing(L)@pre
@@ -254,7 +254,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, 50, Nature.EMPTY)
+	setNature(L, 50, 50, Nature.EMPTY)
 Oracle : 
 	nature(L,50,50) = Nature.EMPTY
 	isEditing(L) == isEditing(L)@pre
@@ -268,7 +268,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, -1, 50, Nature.DIRT)
+	setNature(L, -1, 50, Nature.DIRT)
 Oracle : 	
 	Exception {
 		setNature : x < 0
@@ -279,7 +279,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, -1, Nature.DIRT)
+	setNature(L, 50, -1, Nature.DIRT)
 Oracle : 	
 	Exception {
 		setNature : y < 0
@@ -290,7 +290,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, -99, 50, Nature.DIRT)
+	setNature(L, -99, 50, Nature.DIRT)
 Oracle : 	
 	Exception {
 		setNature : x < 0
@@ -301,7 +301,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, -99, Nature.DIRT)
+	setNature(L, 50, -99, Nature.DIRT)
 Oracle : 	
 	Exception {
 		setNature : y < 0
@@ -312,7 +312,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 100, 50, Nature.DIRT)
+	setNature(L, 100, 50, Nature.DIRT)
 Oracle : 	
 	Exception {
 		setNature : x >= getWidth()
@@ -323,7 +323,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, 80, Nature.DIRT)
+	setNature(L, 50, 80, Nature.DIRT)
 Oracle : 	
 	Exception {
 		setNature : y >= getHeight()
@@ -334,7 +334,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 999, 50, Nature.DIRT)
+	setNature(L, 999, 50, Nature.DIRT)
 Oracle : 	
 	Exception {
 		setNature : x >= getWidth()
@@ -345,7 +345,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, 999, Nature.DIRT)
+	setNature(L, 50, 999, Nature.DIRT)
 Oracle : 	
 	Exception {
 		setNature : y >= getHeight()
@@ -356,7 +356,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, -1, 50, Nature.METAL)
+	setNature(L, -1, 50, Nature.METAL)
 Oracle : 	
 	Exception {
 		setNature : x < 0
@@ -367,7 +367,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, -1, Nature.METAL)
+	setNature(L, 50, -1, Nature.METAL)
 Oracle : 	
 	Exception {
 		setNature : y < 0
@@ -378,7 +378,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, -99, 50, Nature.METAL)
+	setNature(L, -99, 50, Nature.METAL)
 Oracle : 	
 	Exception {
 		setNature : x < 0
@@ -389,7 +389,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, -99, Nature.METAL)
+	setNature(L, 50, -99, Nature.METAL)
 Oracle : 	
 	Exception {
 		setNature : y < 0
@@ -400,7 +400,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 100, 50, Nature.METAL)
+	setNature(L, 100, 50, Nature.METAL)
 Oracle : 	
 	Exception {
 		setNature : x >= getWidth()
@@ -411,7 +411,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, 80, Nature.METAL)
+	setNature(L, 50, 80, Nature.METAL)
 Oracle : 	
 	Exception {
 		setNature : y >= getHeight()
@@ -422,7 +422,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 999, 50, Nature.METAL)
+	setNature(L, 999, 50, Nature.METAL)
 Oracle : 	
 	Exception {
 		setNature : x >= getWidth()
@@ -433,7 +433,7 @@ Oracle :
 Conditions initiales :
 	L = init(100,80)
 Opérations : 
-	setNature(L,L, 50, 999, Nature.METAL)
+	setNature(L, 50, 999, Nature.METAL)
 Oracle : 	
 	Exception {
 		setNature : y >= getHeight()
@@ -1315,3 +1315,292 @@ Oracle :
 	Exception {
 		goPlay : getNature(xExit,yExit+1) != Nature.EMPTY
 	}
+--------------------------------------------------------------------------------
+[Test 4]: goEditing
+--------------------------------------------------------------------------------
+[Test 4.1]: testGoEditing1 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+	goEditing(L)
+Oracle : 
+	isEditing(L) == true
+	FORALL (x,y) / nature(L,x,y) = nature(L,x,y)@pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 4.2]: testGoEditing2 | Negatif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+	goEditing(L)
+	goEditing(L)
+Oracle : 	
+	Exception {
+		goEditing : isEditing() != false
+	}
+--------------------------------------------------------------------------------
+[Test 5]: remove
+--------------------------------------------------------------------------------
+[Test 5.1]: testRemove1 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,0,55,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+
+	remove(L,0,55)
+Oracle : 
+	nature(L,0,55) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.2]: testRemove2 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,99,55,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+
+	remove(L,99,55)
+Oracle : 
+	nature(L,99,55) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.3]: testRemove3 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,55,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+
+	remove(L,46,55)
+Oracle : 
+	nature(L,46,55) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.4]: testRemove4 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,0,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+
+	remove(L,46,0)
+Oracle : 
+	nature(L,46,0) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.5]: testRemove5 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,79,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,46,79)
+Oracle : 
+	nature(L,46,79) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.6]: testRemove6 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,46,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,46,46)
+Oracle : 
+	nature(L,46,46) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.7]: testRemove7 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,79,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,8,79)
+Oracle : 
+	nature(L,8,79) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.8]: testRemove8 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,79,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,46,11)
+Oracle : 
+	nature(L,46,11) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.9]: testRemove9 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,79,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,91,79)
+Oracle : 
+	nature(L,91,79) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.10]: testRemove10 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,79,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,46,77)
+Oracle : 
+	nature(L,46,77) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.11]: testRemove11 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,79,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,8,77)
+Oracle : 
+	nature(L,8,77) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.12]: testRemove12 | Positif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+
+	setNature(L,46,79,Nature.DIRT)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,91,11)
+Oracle : 
+	nature(L,46,79) = Nature.EMPTY
+	isEditing(L) == isEditing(L)@Pre
+	xEntrance(L) == xEntrance(L)@pre
+	yEntrance(L) == yEntrance(L)@pre
+	xExit(L) == xExit(L)@pre
+	yExit(L) == yExit(L)@pre
+--------------------------------------------------------------------------------
+[Test 5.13]: testRemove13 | Negatif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+	setNature(L,46,55,Nature.METAL)
+	
+	goPlay(L, 8, 11, 91, 77)
+	
+	remove(L,46,55)
+Oracle : 	
+	Exception {
+		remove : getNature(x,y) != Nature.DIRT 
+	}
+--------------------------------------------------------------------------------
+[Test 5.14]: testRemove14 | Negatif
+
+Conditions initiales :
+	L = init(100,80)
+Opérations : 
+	setNature(L,46,55,Nature.DIRT)
+	
+	isEditing() == false OR true ???
+	
+	remove(L,46,55)
+Oracle : 	
+	Exception {
+		remove : getNature(x,y) != Nature.DIRT 
+	}
+	
