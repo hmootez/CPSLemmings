@@ -30,11 +30,11 @@ public class LevelContract extends LevelDecorator {
 	}
 	
 	private void checkInitPreConditions(int x, int y) throws PreConditionError {
-		if (!(x > 0)) {
-			throw new PreConditionError("Init_Level : x <= 0");
+		if (!(x > 4)) {
+			throw new PreConditionError("Init_Level : x <= 4");
 		}
-		if (!(y > 0)) {
-			throw new PreConditionError("Init_Level : y <= 0");
+		if (!(y > 4)) {
+			throw new PreConditionError("Init_Level : y <= 4");
 		}
 	}
 
@@ -98,14 +98,14 @@ public class LevelContract extends LevelDecorator {
 	}
 	
 	private void checkSetNaturePreConditions(int x, int y) throws PreConditionError {
-		if (!(x > 0)) {
-			throw new PreConditionError("setNature : x <= 0");
+		if (!(x >= 0)) {
+			throw new PreConditionError("setNature : x < 0");
 		}
-		if (!(x <= getWidth())) {
-			throw new PreConditionError("setNature : x > getWidth()");
+		if (!(x < getWidth())) {
+			throw new PreConditionError("setNature : x >= getWidth()");
 		}
-		if (!(y > 0)) {
-			throw new PreConditionError("setNature : y <= 0");
+		if (!(y >= 0)) {
+			throw new PreConditionError("setNature : y < 0");
 		}
 		if (!(y < getHeight())) {
 			throw new PreConditionError("setNature : y >= getHeight()");
@@ -175,26 +175,29 @@ public class LevelContract extends LevelDecorator {
 		if (!(xEntrance > 0)) {
 			throw new PreConditionError("goPlay : xEntrance <= 0");
 		}
-		if (!(xEntrance <= getWidth())) {
-			throw new PreConditionError("goPlay : xEntrance > getWidth()");
+		if (!(xEntrance < getWidth()-1)) {
+			throw new PreConditionError("goPlay : xEntrance >= getWidth()-1");
 		}
 		if (!(yEntrance > 0)) {
 			throw new PreConditionError("goPlay : yEntrance <= 0");
 		}
-		if (!(yEntrance < getHeight())) {
-			throw new PreConditionError("goPlay : yEntrance >= getHeight()");
+		if (!(yEntrance < getHeight()-1)) {
+			throw new PreConditionError("goPlay : yEntrance >= getHeight()-1");
 		}
 		if (!(xExit > 0)) {
 			throw new PreConditionError("goPlay : xExit <= 0");
 		}
-		if (!(xExit <= getWidth())) {
-			throw new PreConditionError("goPlay : xExit > getWidth()");
+		if (!(xExit < getWidth()-1)) {
+			throw new PreConditionError("goPlay : xExit >= getWidth()-1");
 		}
 		if (!(yExit > 0)) {
 			throw new PreConditionError("goPlay : yExit <= 0");
 		}
-		if (!(yExit < getHeight())) {
-			throw new PreConditionError("goPlay : yExit >= getHeight()");
+		if (!(yExit < getHeight()-1)) {
+			throw new PreConditionError("goPlay : yExit >= getHeight()-1");
+		}
+		if (!(xEntrance != xExit && yEntrance != yExit)) {
+			throw new PreConditionError("goPlay : xEntrance == xExit && yEntrance == yExit");
 		}
 		if (!(getNature(xEntrance,yEntrance) == Nature.EMPTY)) {
 			throw new PreConditionError("goPlay : getNature(xEntrance,yEntrance) != Nature.EMPTY");

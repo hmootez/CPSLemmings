@@ -229,16 +229,16 @@ public class LemmingImpl implements ILemming {
 			
 			System.out.println("cas 6.a ");
 			//System.out.println("Type (" + getX() + ", " + getY() + ") -> " + core.getLevel().getNature(getX(), getY()));
-			System.out.println("\\PRE");
-			System.out.println("X -> " + getX() + " Y -> " + getY());
-			System.out.println("falling -> " + falling);
+			//System.out.println("\\PRE");
+			//System.out.println("X -> " + getX() + " Y -> " + getY());
+			//System.out.println("falling -> " + falling);
 			xLemming = getX_atPre;
 			yLemming = getY_atPre + 1;
 			isDroitier = true;
 			falling = falling_atPre + 1;
-			System.out.println("\\POST");
-			System.out.println("X -> " + xLemming + " Y -> " + yLemming);
-			System.out.println("falling -> " + falling);
+			//System.out.println("\\POST");
+			//System.out.println("X -> " + xLemming + " Y -> " + yLemming);
+			//System.out.println("falling -> " + falling);
 			// Case 6.b:
 		} else if (getComportement().contains(Comportement.FALLER) 
 				&& !getComportement().contains(Comportement.CLIMBER)

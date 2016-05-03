@@ -12,7 +12,7 @@ public interface ILevel {
 	public int getHeight(); /* const */ 
 	public int getWidth(); /* const */
 	public boolean isEditing();
-	/** \pre : x => 0 && x <= width && y => 0 && y <= height*/
+	/** \pre : x => 0 && x < width && y => 0 && y < height*/
 	public Nature getNature(int x,int y);
 	public int getXEntrance(); 
 	public int getYEntrance();
@@ -27,7 +27,7 @@ public interface ILevel {
 	
 	// CONSTRUCTORS ------------------------------------------------------------
 	/**
-	 *  \pre : x > 0 && y > 0
+	 *  \pre : x > 4 && y > 4
 	 *  \post : getHeight(init(x,y)) == y
 	 *  \post : getWidth(init(x,y)) == x
 	 *  \post : isEditing(init(x,y)) == true
@@ -37,13 +37,13 @@ public interface ILevel {
 	 *  \post : getYExit(init(x,y)) == -1
 	 *  \post : getNature(init(h,w),x,y) => (
 	 * 	    							 Nature.METAL FORALL (x,y) / 
-	 *  								 (x = 1 && 0 < y < getHeight()) || (y = 1 && 0 < x < getWidth()) ||
-	 *                                   (x = getWidth() && 0 < y < getHeight()) || (y = getHeight() && 0 < x < getWidth())
+	 *  								 (x = 0 && 0 <= y < getHeight()) || (y = 0 && 0 <= x < getWidth()) ||
+	 *                                   (x = getWidth()-1 && 0 <= y < getHeight()) || (y = getHeight()-1 && 0 <= x < getWidth())
 	 *                               	 )
 	 *                                && (
 	 *                               	 Nature.EMPTY FORALL (x,y) / 
-	 * 									 (x != 1 && 0 < y < getHeight()) || (y != 1 && 0 < x < getWidth()) || 
-	 *                                   (x != getWidth() && 0 < y < getHeight()) || (y != getHeight() && 0 < x < getWidth())
+	 * 									 (x != 0 && 0 < y < getHeight()-1) || (y != 0 && 0 < x < getWidth()-1) || 
+	 *                                   (x != getWidth()-1 && 0 < y < getHeight()-1) || (y != getHeight()-1 && 0 < x < getWidth()-1)
 	 *                               	 )
 	 */
 	public void init(int x, int y);
@@ -52,7 +52,7 @@ public interface ILevel {
 	
 	// OPERATORS ---------------------------------------------------------------
 	/**
-	 *  \pre : x > 0 && x <= getWidth() && y > 0 && y <= getHeight()
+	 *  \pre : x >= 0 && x < getWidth() && y => 0 && y < getHeight()
 	 *  \post : getNature(setNature(x,y,n),x,y) == n 
 	 *  \post : isEditing(setNature(x,y,n)) == isEditing()@Pre
 	 *  \post : getXEntrance(setNature(x,y,n)) == getXEntrance()@Pre
@@ -64,12 +64,13 @@ public interface ILevel {
 	
 	
 	/**
-	 *  \pre : FORALL (x,y) / (x = 1 && 0 < y < getHeight()) || (y = 1 && 0 < x < getWidth()) 
-	 *                     || (x = getWidth() && 0 < y < getHeight()) || (y = getHeight() && 0 < x < getWidth()) 
+	 *  \pre : FORALL (x,y) / (x = 0 && 0 <= y < getHeight()) || (y = 0 && 0 <= x < getWidth()) 
+	 *                     || (x = getWidth()-1 && 0 <= y < getHeight()) || (y = getHeight()-1 && 0 <= x < getWidth()) 
 	 *                     && getNature(x,y) == Nature.METAL
 	 *  \pre : isEditing() == true
-	 *  \Pre : xEntrance > 0 && xEntrance < getWidth() && yEntrance > 0 && yEntrance < getHeight()
-	 *  \Pre : xExit > 0 && xExit < getWidth() && yExit > 0 && yExit < getHeight()
+	 *  \Pre : xEntrance > 0 && xEntrance < getWidth()-1 && yEntrance > 0 && yEntrance < getHeight()-1
+	 *  \Pre : xExit > 0 && xExit < getWidth()-1 && yExit > 0 && yExit < getHeight()-1
+	 *  \Pre : (xEntrance != xExit && yEntrance != yExit)
 	 *  \Pre : getNature(xEntrance,yEntrance) == Nature.EMPTY && getNature(xEntrance,yEntrance-1) == Nature.EMPTY && getNature(xEntrance,yEntrance+1) == Nature.EMPTY
 	 *  \Pre : getNature(xExit,yExit) == Nature.EMPTY && getNature(xExit,yExit-1) == Nature.METAL && getNature(xExit,yExit+1) == Nature.EMPTY
 	 *  \post : isEditing(goPlay()) == false
