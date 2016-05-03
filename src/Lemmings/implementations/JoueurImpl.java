@@ -27,7 +27,7 @@ public class JoueurImpl implements IJoueur {
 	@Override
 	public int getNbJetons() {
 		int res = 0;
-		Comportement[] comp = { Comportement.WALKER };
+		Comportement[] comp = { Comportement.WALKER , Comportement.BOMBER };
 		
 		for (int i = 0; i < jetons.size(); i++)
 			res = res + jetons.get(comp[i]);
